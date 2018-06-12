@@ -12,13 +12,14 @@ declare var $: any;
   providers: [EquipoService]
 })
 export class CreateEquipoComponent implements OnInit {
-  emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   municipios: any[];
   id: number;
   estadoSeleccionado: string;
   localidadesString: string[] = [];
   equipo: Equipo;
   clientes: any[];
+  titulo = 'Nuevo Equipo';
+
   constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: EquipoService) {
     this._route.params
       .subscribe(params => {

@@ -21,6 +21,8 @@ export class CreateTipoMovimientoComponent implements OnInit {
   correo: string;
   tipoMovimiento: TipoMovimiento;
   tipoMovimientos = [];
+  titulo = 'Nuevo Tipo de Movimiento';
+
   constructor(
     private _router: Router,
     private _route: ActivatedRoute,

@@ -62,15 +62,13 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('sucursal', this.usuario.SucursalId.toString());
       this.router.navigate(['/admin']);
     }
-    //valida si la contraseña esta vacia
+    // Valida si la contraseña esta vacia.
     if ((!this.usuario.Contra) || (this.usuario.Contra === '')) {
-      console.log(this.usuario);
       $('#msg-contra').addClass('alert-validate');
       return false;
     }
     this._service.activarEsperando();
     this._service.postGenerico(this.usuario, '/usuarios/login').subscribe(data => {
-      console.log(data);
       this.isBlocked  = true;
       this.sucursales = data.Sucursales;
       localStorage.setItem('sucursales',  JSON.stringify(this.sucursales));
@@ -78,7 +76,6 @@ export class LoginComponent implements OnInit {
       this.tituloBoton = 'Seleccione Empresa';
       this._service.cerrarEsperando();
     }, error => {
-      console.log(error);
       if (!error._body.isTrusted) {
         let er = eval('(' + error._body + ')');
         if (er) {

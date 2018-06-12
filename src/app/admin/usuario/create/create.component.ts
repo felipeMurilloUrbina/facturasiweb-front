@@ -10,6 +10,8 @@ import { UsuarioService } from '../usuario.service';
 })
 export class CreateUsuarioComponent implements OnInit {
   usuario: Usuario;
+  titulo = 'Nuevo Usuario';
+
   constructor(private _service: UsuarioService) {
     this.usuario = new  Usuario();
    }

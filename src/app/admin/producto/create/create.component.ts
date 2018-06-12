@@ -18,6 +18,7 @@ export class CreateProductoComponent implements OnInit {
   display: Boolean = false;
   filtroResultados: string[] = [];
   producto: Producto;
+  titulo = 'Nuevo Producto';
   constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: ProductoService) {
     this.producto = new Producto();
   }

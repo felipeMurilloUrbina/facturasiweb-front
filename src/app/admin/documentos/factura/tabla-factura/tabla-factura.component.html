@@ -1,4 +1,4 @@
-
+<!-- 
 <p-table #dt [columns]="cols" [value]="facturas"[customSort]="true" [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
       <div style="text-align: right">        
@@ -15,12 +15,14 @@
           <th *ngFor="let col of columns">
               {{col.header}}
           </th>
+          <th>Acciones</th>
       </tr>
       <tr>
           <th *ngFor="let col of columns" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'Codigo'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-              <p-multiSelect *ngSwitchCase="'Cliente.Descripcion'" [options]="clientes" defaultLabel="Todos Los clientes" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
+            <div class="text-center" *ngSwitchCase="'Codigo'"><input  type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>
+            <p-multiSelect *ngSwitchCase="'Cliente.Descripcion'" [options]="clientes" defaultLabel="Todos Los clientes" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
           </th>
+          <th>Acciones</th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -42,6 +44,57 @@
   <ng-template pTemplate="summary" let-rowData>
         <div style="text-align:left">
           <button type="button" pButton icon="fa-plus" routerLink="nuevo" routerLinkActive="active" label="Nueva Factura"></button>
+        </div>
+    </ng-template>
+</p-table> -->
+
+<p-table #dt [columns]="cols" [value]="facturas" [paginator]="true" [customSort]="true" [rows]="10">
+    <ng-template pTemplate="caption">
+        <div style="text-align: left;"> 
+            <button type="button" pButton icon="fa-file-o" iconPos="left" label="Exportar" (click)="dt.exportCSV()" style="float:left"></button>
+            <button type="button" pButton icon="fa-refresh" iconPos="left" label="Refrescar" (click)="get()" style="float:left"></button>  
+        </div>
+        <div style="text-align: right">        
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" class="form-control" placeholder="Busqueda..." (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                {{col.header}}
+            </th>
+            <th>Acciones</th>
+        </tr>
+        <tr>
+            <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                <!-- <div class="col-md-12"> -->
+                    <input *ngSwitchCase="'Codigo'" class="form-control" type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                <!-- </div> -->
+                <p-multiSelect *ngSwitchCase="'Cliente.Descripcion'" [options]="clientes" defaultLabel="Todos" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
+            </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                <div *ngSwitchCase="'Total'">${{rowData.Total | number: '1.2-2'}} </div>
+              <div *ngSwitchDefault>{{ _service.resolveFieldData(rowData, col.field) }}</div>
+            </td>
+            <td>
+                <div class="text-center">
+                    <button type="button" pButton (click)="cancelar(rowData)" icon="fa-ban"></button>
+                    <button type="button" pButton (click)="reEnviar(rowData)"  icon="fa-envelope" ></button>
+                    <button type="button" pButton (click)="descargarPDF(rowData)" icon="fa-file-pdf-o"></button>
+                    <button type="button" pButton (click)="descargarXML(rowData)" icon="fa fa-code"></button>
+                </div>
+            </td>
+        </tr> 
+    </ng-template>
+    <ng-template pTemplate="summary" let-rowData>
+        <div style="text-align:left">
+            <button type="button" pButton icon="fa-plus" routerLink="nuevo" routerLinkActive="active" label="Nueva Factura"></button>
         </div>
     </ng-template>
 </p-table>

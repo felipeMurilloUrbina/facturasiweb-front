@@ -9,12 +9,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
-    ButtonModule,    
-    FormsModule,    
+    ButtonModule,
+    FormsModule,
     ReactiveFormsModule,
     TableModule,
-    SharedModule, 
-    CommonModule,           
+    SharedModule,
+    CommonModule,
     routingAlmacen
   ],
   declarations: [

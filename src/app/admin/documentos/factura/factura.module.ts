@@ -9,6 +9,7 @@ import { ConsultaClienteComponent, ConsultaProductoComponent } from '../../../sh
 import { CapturaIneComponent } from '../../../share/capturar-ine';
 import { ModificacionProductoComponent } from '../../../share/modificacion-producto';
 import { ShareModule } from '../../../share/share.module';
+import { ToNumberPipe } from '../../../base';
 
 
 @NgModule({
@@ -16,21 +17,23 @@ imports: [
   AutoCompleteModule,
   ButtonModule,
   DialogModule,
-  FormsModule,    
+  FormsModule,
   ReactiveFormsModule,
   MultiSelectModule,
   TableModule,
   DataTableModule,
   SharedModule,
   ShareModule,
-  CommonModule, 
+  CommonModule,
   routingFactura
 ],
   declarations: [
     TablaFacturaComponent,
     FacturaComponent,
+    ToNumberPipe,
     CreateFacturaComponent,
   ],
-  exports: [TablaFacturaComponent]
+  exports: [TablaFacturaComponent],
+  providers: [ToNumberPipe]
 })
-export class FacturaModule{}
+export class FacturaModule {}

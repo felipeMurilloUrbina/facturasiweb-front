@@ -24,6 +24,8 @@ export class CreateProveedorComponent implements OnInit {
   correo: string;
   cargarFactura = false;
   proveedor: Proveedor;
+  titulo = 'Nuevo Proveedor';
+
   constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: ProveedorService) {
     this._route.params
       .subscribe(params => {

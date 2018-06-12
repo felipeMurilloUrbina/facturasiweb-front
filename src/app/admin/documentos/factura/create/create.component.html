@@ -1,23 +1,23 @@
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Nueva Factura</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item">
-              <a href="#">Inicio</a>
-            </li>
-            <li class="breadcrumb-item active">Nueva Factura</li>
-          </ol>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>{{titulo}}</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                <a href="#">Inicio</a>
+              </li>
+              <li class="breadcrumb-item active">{{titulo}}</li>
+            </ol>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- /.container-fluid -->
-  </section>
+      <!-- /.container-fluid -->
+    </section>
   <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
@@ -26,180 +26,189 @@
           <!-- Small boxes (Stat box) -->
           <section id="factura" class="invoice">
             <!-- title row -->
-            <div class="row invoice-info">
-              <div class="col-sm-6 invoice-col">
-                Factura: {{factura.Serie + '-' + factura.Folio}}
-                <address>
-                  <i class="fa fa-globe"></i> Sucursal:
-                  <input type="text" id="Sucursal" value="{{factura.Sucursal.Descripcion}}" class="form-control" readonly>
-                  <i class="fa fa-globe"></i> Regimen:
-                  <select class="form-control select2" [(ngModel)]="factura.RegimenId" style="width: 100%;">
-                    <option value="{{regimen.RegimenId}}" *ngFor="let regimen of regimenes">{{regimen.Regimen.Descripcion}}</option>
-                  </select>
-                </address>
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-6 invoice-col">
-                Cliente:
-                <address *ngIf="factura.Cliente">
-                  <strong>{{factura.Cliente?.Descripcion}}</strong>
-                  <br>
-                  <strong>{{factura?.Cliente?.Rfc}}</strong>
-                  <br> {{factura?.Cliente?.Calle}}
-                  <br> {{factura?.Cliente?.Ciudad}}, {{factura?.Cliente?.Municipio}}, {{factura?.Cliente?.Estado + ' ' + factura?.Cliente?.CodigoPostal}}
-                  <br> {{factura?.Cliente?.Pais}}
-                  <br>
-                  <button type="button" pButton icon="fa-search" (click)="abrirConsultaCliente() " label="Cambiar Cliente..."></button>
-                </address>
-                <address *ngIf="!factura.Cliente">
-                  <strong>Seleccione un cliente....</strong>
-                  <button type="button" pButton icon="fa-search" (click)="abrirConsultaCliente() "
-                    label="Buscar...."></button>
-                  <br>
-                </address>
+            <div class="row">
+              <div class="col-12">
+                <div class="row invoice-info">
+                  <div class="col-sm-6 invoice-col">
+                    Factura: {{factura.Serie + '-' + factura.Folio}}
+                    <address>
+                      <i class="fa fa-globe"></i> Sucursal:
+                      <input type="text" id="Sucursal" value="{{factura.Sucursal.Descripcion}}" class="form-control" readonly>
+                      <i class="fa fa-globe"></i> Regimen:
+                      <select class="form-control select2" [(ngModel)]="factura.RegimenId" style="width: 100%;">
+                        <option value="{{regimen.RegimenId}}" *ngFor="let regimen of regimenes">{{regimen.Regimen.Descripcion}}</option>
+                      </select>
+                    </address>
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-6 invoice-col">
+                    Cliente:
+                    <address *ngIf="factura.Cliente">
+                      <strong>{{factura.Cliente?.Descripcion}}</strong>
+                      <br>
+                      <strong>{{factura?.Cliente?.Rfc}}</strong>
+                      <br> {{factura?.Cliente?.Calle}}
+                      <br> {{factura?.Cliente?.Ciudad}}, {{factura?.Cliente?.Municipio}}, {{factura?.Cliente?.Estado + ' ' + factura?.Cliente?.CodigoPostal}}
+                      <br> {{factura?.Cliente?.Pais}}
+                      <br>
+                      <button type="button" pButton icon="fa-search" (click)="abrirConsultaCliente() " label="Cambiar Cliente..."></button>
+                    </address>
+                    <address *ngIf="!factura.Cliente">
+                      <strong>Seleccione un cliente....</strong>
+                      <button type="button" pButton icon="fa-search" (click)="abrirConsultaCliente() "
+                        label="Buscar...."></button>
+                      <br>
+                    </address>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- info row -->
             <!-- Table row -->
             <div class="row">
-              <div class="col-xs-12 table-responsive">
-                <p-table [value]="factura.Detalles" emptyMessage="No hay Detalles" [scrollable]="true" scrollHeight="{{height}}" [responsive]="true"
-                  [rows]="20" [paginator]="true" #dt>
-                  <ng-template pTemplate="header" let-columns>
-                    <tr>
-                      <th style="width:10%">Codigo</th>
-                      <th style="width:35%">Descripcion</th>
-                      <th style="width:10%">Cantidad</th>
-                      <th style="width:10%">Descuento</th>
-                      <th style="width:10%">Prec. Unit.</th>
-                      <th style="width:10%">Total</th>
-                      <th style="width:12%">Acciones</th>
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="body" let-det>
-                    <tr>
-                      <td style="width:10%">{{ det.Codigo }}</td>
-                      <td style="width:35%" pEditableColumn>
-                        <p-cellEditor>
-                          <ng-template pTemplate="input">
-                            <input type="text" [(ngModel)]="det.Descripcion">
-                          </ng-template>
-                          <ng-template pTemplate="output">
-                            <p class="text-justify">
-                              {{ det.Descripcion }}
-                            </p>
-                          </ng-template>
-                        </p-cellEditor>
-                      </td>
-                      <td style="width:10%" pEditableColumn>
-                        <p-cellEditor>
-                          <ng-template pTemplate="input">
-                            <input type="number" step="any" [(ngModel)]="det.Cantidad">
-                          </ng-template>
-                          <ng-template pTemplate="output">
-                            {{ det.Cantidad }}
-                          </ng-template>
-                        </p-cellEditor>
-                      </td>
-                      <td style="width:10%">{{ det.TasaDesc }}</td>
-                      <td style="width:10%" pEditableColumn>
-                        <p-cellEditor>
-                          <ng-template pTemplate="input">
-                            <input type="number" step="any" [(ngModel)]="det.Precio">
-                          </ng-template>
-                          <ng-template pTemplate="output">
-                            ${{ det.Precio | number: '1.2-2' }}
-                          </ng-template>
-                        </p-cellEditor>
-                      </td>
-                      <td style="width:10%">${{ det.Importe | number: '1.2-2' }}</td>
-                      <td style="width:12%">
-                        <div class="text-center">
-                          <button type="button" pButton (click)="editar(detalle)" icon="fa-pencil"></button>
-                          <button type="button" pButton (click)="agregarComplemento(detalle)" icon="fa-plus"></button>
-                          <button type="button" pButton (click)="eliminar(detalle)" icon="fa-trash-o"></button>
-                        </div>
-                      </td>
-                    </tr>
-                  </ng-template>
-                  <ng-template pTemplate="summary" let-rowData>
-                    <div style="text-align:left">
-                      <button type="button" pButton icon="fa-plus" (click)="onConsultarProducto()" routerLinkActive="active" label="Agregar Producto"></button>
-                    </div>
-                  </ng-template>
-                </p-table>
+              <div class="col-12">
+                <div class="col-12 table-responsive">
+                  <p-table [value]="factura.Detalles" emptyMessage="No hay Detalles" [scrollable]="true" scrollHeight="{{height}}" [responsive]="true"
+                    [rows]="20" [paginator]="true" #dt>
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th style="width:10%">Codigo</th>
+                        <th style="width:35%">Descripcion</th>
+                        <th style="width:10%">Cantidad</th>
+                        <th style="width:10%">Descuento</th>
+                        <th style="width:10%">Prec. Unit.</th>
+                        <th style="width:10%">Total</th>
+                        <th style="width:12%">Acciones</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-det>
+                      <tr>
+                        <td style="width:10%">{{ det.Codigo }}</td>
+                        <td style="width:35%" pEditableColumn>
+                          <p-cellEditor>
+                            <ng-template pTemplate="input">
+                              <input type="text" [(ngModel)]="det.Descripcion">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                              <p class="text-justify">
+                                {{ det.Descripcion }}
+                              </p>
+                            </ng-template>
+                          </p-cellEditor>
+                        </td>
+                        <td style="width:10%" pEditableColumn>
+                          <p-cellEditor>
+                            <ng-template pTemplate="input">
+                              <input type="number" step="any" [(ngModel)]="det.Cantidad">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                              {{ det.Cantidad }}
+                            </ng-template>
+                          </p-cellEditor>
+                        </td>
+                        <td style="width:10%">{{ det.TasaDesc }}</td>
+                        <td style="width:10%" pEditableColumn>
+                          <p-cellEditor>
+                            <ng-template pTemplate="input">
+                              <input type="number" step="any" [(ngModel)]="det.Precio">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                              ${{ det.Precio | toNumber: '1.2-2' }}
+                            </ng-template>
+                          </p-cellEditor>
+                        </td>
+                        <td style="width:10%">${{ det.Importe | toNumber: '1.2-2' }}</td>
+                        <td style="width:12%">
+                          <div class="text-center">
+                            <button type="button" pButton (click)="editar(detalle)" icon="fa-pencil"></button>
+                            <button type="button" pButton (click)="agregarComplemento(detalle)" icon="fa-plus"></button>
+                            <button type="button" pButton (click)="eliminar(detalle)" icon="fa-trash-o"></button>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary" let-rowData>
+                      <div style="text-align:left">
+                        <button type="button" pButton icon="fa-plus" (click)="onConsultarProducto()" routerLinkActive="active" label="Agregar Producto"></button>
+                      </div>
+                    </ng-template>
+                  </p-table>
+                </div>
               </div>
               <!-- /.col -->
             </div>
             <!-- /.row -->
             <div class="row">
               <!-- accepted payments column -->
-              <div class="col-xs-8">
-                <div class="row" margin-left>
-                  <div class="col-xs-8">
-                    <div class="form-group">
-                      <label>Uso del CFDI:</label>
-                      <select class="form-control select2" (change)="cambioMetodo($event.target.value)" [(ngModel)]="factura.UsoCFDIId" style="width: 100%;">
-                        <option value="0" selected>[*Seleccione un uso de CFDI]</option>
-                        <option value="{{uso.Id}}" *ngFor="let uso of usoCFDIs">{{uso.Descripcion}}</option>
-                      </select>
+              <div class="col-8">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-8">
+                          <div class="form-group">
+                            <label>Uso del CFDI:</label>
+                            <select class="form-control select2" (change)="cambioMetodo($event.target.value)" [(ngModel)]="factura.UsoCFDIId">
+                              <option value="0" selected>[*Seleccione un uso de CFDI]</option>
+                              <option value="{{uso.Id}}" *ngFor="let uso of usoCFDIs">{{uso.Descripcion}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="form-group">
+                            <label>Tipo De Venta:</label>
+                            <select class="form-control select2" [(ngModel)]="factura.EsCredito" style="width: 100%;">
+                              <option [ngValue]="false">Contado</option>
+                              <option [ngValue]="true">Credito</option>
+                            </select>
+                          </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-xs-4">
-                    <div class="form-group">
-                      <label>Tipo De Venta:</label>
-                      <select class="form-control select2" [(ngModel)]="factura.EsCredito" style="width: 100%;">
-                        <option [ngValue]="false">Contado</option>
-                        <option [ngValue]="true">Credito</option>
-                      </select>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label>Formas de pagos:</label>
+                          <select class="form-control select2" (change)="cambioMetodo($event.target.value)" [(ngModel)]="factura.FormaPagoId" style="width: 100%;">
+                            <option value="0" selected>[*Seleccione una forma de pago]</option>
+                            <option value="{{metodo.Id}}" *ngFor="let metodo of formaPagos">{{metodo.Descripcion}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div *ngIf="tieneCuenta" class="col-6">
+                        <div class="form-group">
+                          <label>Numero de cuenta:</label>
+                          <input type="text" class="form-control" name="" [(ngModel)]="factura.NoCuentaPago" placeholder="Numero de cuenta">
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label>Metodos de pago:</label>
+                          <select class="form-control select2" [(ngModel)]="factura.MetodoPagoId" style="width: 100%;">
+                            <option value="0" selected>[*Seleccione un metodo de pago]</option>
+                            <option value="{{metodo.Id}}" *ngFor="let metodo of metodoPagos">{{metodo.Descripcion}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label>Condiciones de pago:</label>
+                          <input type="text" class="form-control" name="" [(ngModel)]="factura.PagoEn" placeholder="Condiciones de pago">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label>Observaciones:</label>
+                          <textarea class="form-control" [(ngModel)]="factura.Observacion" id=""></textarea>
+                        </div>
+                      </div>
+                    </div>
                 </div>
-                <div class="row" margin-left>
-                  <div class="col-xs-6">
-                    <div class="form-group">
-                      <label>Formas de pagos:</label>
-                      <select class="form-control select2" (change)="cambioMetodo($event.target.value)" [(ngModel)]="factura.FormaPagoId" style="width: 100%;">
-                        <option value="0" selected>[*Seleccione una forma de pago]</option>
-                        <option value="{{metodo.Id}}" *ngFor="let metodo of formaPagos">{{metodo.Descripcion}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div *ngIf="tieneCuenta" class="col-xs-6">
-                    <div class="form-group">
-                      <label>Numero de cuenta:</label>
-                      <input type="text" class="form-control" name="" [(ngModel)]="factura.NoCuentaPago" placeholder="Numero de cuenta">
-                    </div>
-                  </div>
-                </div>
-                <div class="row" margin-left>
-                  <div class="col-xs-6">
-                    <div class="form-group">
-                      <label>Metodos de pago:</label>
-                      <select class="form-control select2" [(ngModel)]="factura.MetodoPagoId" style="width: 100%;">
-                        <option value="0" selected>[*Seleccione un metodo de pago]</option>
-                        <option value="{{metodo.Id}}" *ngFor="let metodo of metodoPagos">{{metodo.Descripcion}}</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-xs-6">
-                    <div class="form-group">
-                      <label>Condiciones de pago:</label>
-                      <input type="text" class="form-control" name="" [(ngModel)]="factura.PagoEn" placeholder="Condiciones de pago">
-                    </div>
-                  </div>
-                </div>
-                <div class="row" margin-left>
-                  <div class="col-xs-12">
-                    <div class="form-group">
-                      <label>Observaciones:</label>
-                      <textarea class="form-control" [(ngModel)]="factura.Observacion" id=""></textarea>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
               <!-- /.col -->
-              <div class="col-xs-4">
+              <div class="col-4">
                 <p class="lead">Totales de Factura</p>
                 <div class="table-responsive">
                   <table class="table">
@@ -245,7 +254,7 @@
             <!-- /.row -->
             <!-- this row will not appear when printing -->
             <div class="row no-print">
-              <div class="col-xs-12">
+              <div class="col-12">
                 <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:right" (click)="guardar()" label="Guardar  Factura">
                 </button>
                 <button type="button" pButton icon="fa-credit-card" style="float:right" (click)="regresar()" class="ui-button-danger" label="Cancelar  Factura">

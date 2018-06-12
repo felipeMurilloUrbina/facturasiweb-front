@@ -32,8 +32,6 @@ export class DashboardComponent implements OnInit {
     this.user = JSON.parse(this._jwtHelper.decodeToken(localStorage.getItem('token')).user);
    }
   ngOnInit() {
-    $('li').removeClass('active');
-    $('#inicio').addClass('active');
     this.get();
     this.getFacturas();
   }

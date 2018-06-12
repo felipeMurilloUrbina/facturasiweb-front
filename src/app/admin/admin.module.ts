@@ -55,9 +55,7 @@ import { AdminAppComponent, PiePaginaComponent, ContenidoComponent, EncabezadoCo
     ContenidoComponent,
     PiePaginaComponent,
     PerfilComponent,
-    ToNumberPipe
   ],
-  exports: [AdminAppComponent],
-  providers: [ToNumberPipe]
+  exports: [AdminAppComponent]
 })
 export class AdminModule { }

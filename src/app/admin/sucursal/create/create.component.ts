@@ -25,6 +25,8 @@ export class CreateSucursalComponent implements OnInit {
   regimenesSeleccionados: any[] = [];
   localidadesString: string[] = [];
   sucursal: Sucursal;
+  titulo = 'Nuevo Sucursal';
+
   constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: SucursalService) {
     this.setForm(undefined);
     this._route.params

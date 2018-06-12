@@ -14,7 +14,6 @@ declare var $: any;
   providers: [LineaService]
 })
 export class CreateLineaComponent implements OnInit {
-  emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   id: number;
   estadoSeleccionado: string;
   localidadesString: string[] = [];
@@ -23,6 +22,8 @@ export class CreateLineaComponent implements OnInit {
   cargarFactura = false;
   linea: Linea;
   lineas = [];
+  titulo = 'Nueva Linea';
+  
   constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: LineaService) {
     this._route.params
       .subscribe(params => {
