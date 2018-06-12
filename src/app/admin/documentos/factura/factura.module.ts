@@ -30,6 +30,7 @@ imports: [
     TablaFacturaComponent,
     FacturaComponent,
     CreateFacturaComponent,
-  ]
+  ],
+  exports: [TablaFacturaComponent]
 })
 export class FacturaModule{}

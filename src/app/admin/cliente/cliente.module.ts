@@ -4,7 +4,7 @@ import { ClienteComponent, CreateClienteComponent } from '.';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule, SharedModule, AutoCompleteModule, DialogModule, DataTableModule, DropdownModule } from 'primeng/primeng';
+import { ButtonModule, SharedModule, AutoCompleteModule, DialogModule, DataTableModule, DropdownModule, TabMenuModule, AccordionModule } from 'primeng/primeng';
 import { TablaFacturaComponent } from '../documentos';
 import { BrowserModule } from '@angular/platform-browser';
 import { ClienteTablaServicioComponent } from '../../cliente';
@@ -14,6 +14,8 @@ import { FacturaModule } from '../documentos/factura/factura.module';
 @NgModule({
   imports: [
     AutoCompleteModule,
+    AccordionModule,
+    TabMenuModule,
     ButtonModule,
     DialogModule,
     DropdownModule,
@@ -21,11 +23,12 @@ import { FacturaModule } from '../documentos/factura/factura.module';
     ReactiveFormsModule,
     TableModule,
     DataTableModule,
-    FacturaModule,
     SharedModule,
     CommonModule, 
-    routingCliente],
-  declarations: [
+    FacturaModule,
+    routingCliente
+  ],
+    declarations: [
     ClienteComponent,
     ClienteTablaServicioComponent,
     CreateClienteComponent
