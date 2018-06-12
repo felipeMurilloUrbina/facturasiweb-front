@@ -1,0 +1,167 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Proveedor
+      <small>Nuevo</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li>Proveedores</li>
+      <li class="active">Nuevo</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="descripcion">Razón Social:</label>
+                <input type="text" class="form-control" id="descripcion" [(ngModel)]="proveedor.Descripcion" placeholder="Escriba el Razon Social">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="rfc">RFC:</label>
+                <input type="text" class="form-control" id="rfc" [(ngModel)]="proveedor.Rfc" placeholder="Escriba la RFC">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="calle">Calle:</label>
+                <input type="text" class="form-control" id="calle" [(ngModel)]="proveedor.Calle" placeholder="Escriba la calle">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="c-p">Codigo Postal:</label>
+                <input type="text" class="form-control" id="c-p" [(ngModel)]="proveedor.CodigoPostal" placeholder="Escriba el codigo postal">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="colonia">Colonia:</label>
+                <input type="text" class="form-control" id="colonia" [(ngModel)]="proveedor.Colonia" placeholder="Escriba la Colonia">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="pais">Pais:</label>
+                <select id="pais" class="form-control select2" [(ngModel)]="proveedor.Pais"  style="width: 100%;">
+                  <option value ="" selected="selected">*Seleccione la Pais</option>
+                  <option value="{{pais.Codigo}}" *ngFor="let pais of paises">{{pais.Descripcion}}</option>
+                </select>
+              </div>
+            </div>
+            <div  *ngIf="proveedor.Pais !=='MEX'" class="col-md-6">
+              <div class="form-group">
+                <label for="c-p">Estado:</label>
+                <input type="text" class="form-control" id="c-p" [(ngModel)]="proveedor.Estado" placeholder="Escriba el estado">
+              </div>
+            </div>
+            <div *ngIf="proveedor.Pais ==='MEX'" class="col-md-3">
+              <div class="form-group">
+                <label for="estado">Estado:</label>
+                <select class="form-control select2" id="estado" [(ngModel)]="proveedor.Estado" (change)="onChangeEstado($event.target.value)" style="width: 100%;" required>
+                  <option value ="" selected="selected">*Seleccione un estado</option>
+                  <option value ="Guerrero" selected="selected">Guerrero</option>
+                  <option value ="Baja California Sur">Baja California Sur</option>
+                  <option value ="Querétaro">Querétaro</option>
+                  <option value ="Durango">Durango</option>
+                  <option value ="Nuevo León">Nuevo León</option>
+                  <option value ="Tabasco">Tabasco</option>
+                  <option value ="San Luis Potosí">San Luis Potosí</option>
+                  <option value ="México">México</option>
+                  <option value ="Puebla">Puebla</option>
+                  <option value ="Yucatán">Yucatán</option>
+                  <option value ="Veracruz de Ignacio de la Llave">Veracruz de Ignacio de la Llave</option>
+                  <option value ="Michoacán de Ocampo">Michoacán de Ocampo</option>
+                  <option value ="Chiapas">Chiapas</option>
+                  <option value ="Quintana Roo">Quintana Roo</option>
+                  <option value ="Aguascalientes">Aguascalientes</option>
+                  <option value ="Nayarit">Nayarit</option>
+                  <option value ="Tlaxcala">Tlaxcala</option>
+                  <option value ="Jalisco">Jalisco</option>
+                  <option value ="Hidalgo">Hidalgo</option>
+                  <option value ="Guanajuato">Guanajuato</option>
+                  <option value ="Sonora">Sonora</option>
+                  <option value ="Colima">Colima</option>
+                  <option value ="Oaxaca">Oaxaca</option>
+                  <option value ="Zacatecas">Zacatecas</option>
+                  <option value ="Chihuahua">Chihuahua</option>
+                  <option value ="Sinaloa">Sinaloa</option>
+                  <option value ="Morelos">Morelos</option>
+                  <option value ="Baja California">Baja California</option>
+                  <option value ="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+                  <option value ="Ciudad de México">Ciudad de México</option>
+                  <option value ="Campeche">Campeche</option>
+                  <option value ="Tamaulipas">Tamaulipas</option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="proveedor.Pais ==='MEX'" class="col-md-3">
+              <div class="form-group">
+                <label for="municipio">Municipio:</label>
+                <select  id="municipio"  class="form-control select2" [(ngModel)]="proveedor.Municipio" (change)="onChangeMun($event.target.value)" style="width: 100%;" required>
+                  <option value ="" selected="selected">*Seleccione la municipio</option>
+                  <option value="{{municipio}} " *ngFor="let municipio of municipios">{{municipio}}</option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="proveedor.Pais ==='MEX'" class="col-md-3">
+              <div class="form-group">
+                <label for="ciudad">Ciudad:</label><br/>
+                <p-autoComplete [(ngModel)]="proveedor.Ciudad" id="ciudad" [minLength]="3" [size]="35" [suggestions]="localidadesString" (completeMethod)="buscar($event)" (onSelect) ="select($event)"></p-autoComplete >
+                <!-- <input type="text" class="form-control" id="descripcion" formControlName="Ciudad" placeholder="Escriba la ciudad"> -->
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                  <label for="descripcion">Correo:</label>
+                <div class="input-group">
+                  <input type="email" [(ngModel)]="correo" class="form-control" id="correo" placeholder="Escriba el Correo" >
+                  <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" (click)= "agregarCorreo()">Agregar!</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+                <ul class="list-group">
+                  <li class="list-group-item justify-content-between" *ngFor="let correo of correos">
+                    {{correo}}
+                    <span class="badge badge-default badge-pill" (click)="cerrar(correo)">X</span>
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <footer class="container-fluid text-center">
+      <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:center" routerLink="/admin/proveedores"  class="ui-button-danger" label="Cancelar Proveedor">
+      </button>
+      <button type="button" pButton icon="fa-check" style="float:center" (click)="guardar()" label="Guardar  Proveedor">
+      </button>
+    </footer>
+  </section>
+  <!-- /.content -->
+</div>

@@ -1,0 +1,17 @@
+<p-dialog header="Consulta de Productos" [(visible)]="visible" modal="modal" width="1000" [responsive]="true" (onHide)="cerrar()">
+  <p-dataTable [value]="productos" [rows]="10" scrollable="true"
+      emptyMessage="No registros" (onRowClick)="seleccionar($event)" scrollHeight="150px"
+      [paginator]="true" [responsive]="true" selectionMode="single">
+    <p-header>Productos</p-header>
+    <p-column field="Codigo" header="Codigo Sat" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+    <p-column field="Codigo" header="Codigo " [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+    <p-column field="Descripcion" header="Descripción" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+    <p-column field="Precio" header="Precio" [style]=" {'overflow':'visible', 'width':'15%' }">
+      <ng-template let-col let-det="rowData" pTemplate="body">
+        <div class="text-center">
+          ${{ det.Precio | number : '1.2-2' }}
+        </div>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+</p-dialog>

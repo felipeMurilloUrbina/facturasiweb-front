@@ -1,0 +1,123 @@
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+      <div class="pull-left image">
+        <img src="{{_service.getUrlAbsoluta() + this.user?.Avatar}}" class="img-circle" alt="User Image">
+      </div>
+      <div class="pull-left info">
+        <p>{{user?.NombreCompleto}}</p>
+        <a><i class="fa fa-circle text-success"></i> Online</a>
+      </div>
+    </div>
+    <!-- search form -->
+    <div class="sidebar-form">
+
+      <div class="form-group">
+        <label style="color:white;">Sucursales:</label>
+        <select  class="form-control" [(ngModel)]="sucursalId" (change)="onCambioEmpresa($event.target.value)"  style="width: 100%;">
+          <option  value="" >[*Seleccione una sucursal]</option>
+          <option  value="{{suc.Id}}" *ngFor="let suc of sucursales">{{suc.Id}}--{{suc.Descripcion}}</option>
+        </select>
+      </div>
+    </div>
+    <ul *ngIf="user?.Tipo!='cliente-cliente'" class="sidebar-menu">
+      <li class="header">Menu de Navegacion</li>
+      <li>
+        <a routerLink="dashboard">
+            <i id="inicio" class="fa fa-home"></i> <span>Inicio</span>
+        </a>
+      </li>
+      <li class="active treeview">
+        <a>
+            <i class="fa fa-list"></i> <span>Catalogos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        <ul class="treeview-menu">
+          <li id="almacenes"><a routerLink="almacenes"><i class="fa fa-university"></i> Almacenes</a></li>
+          <li id="equipos" ><a routerLink="equipos"><i class="fa fa-truck"></i> Equipos</a></li>
+          <li id="clientes" class="active"><a routerLink="clientes"><i class="fa fa-user"></i> Clientes</a></li>
+          <li id="lineas"><a routerLink="lineas"><i class="fa fa-list"></i> Lineas</a></li>
+          <li id="proveedores"><a routerLink="proveedores"><i class="fa fa-user"></i> Proveedores</a></li>
+          <li id="productos"><a routerLink="productos"><i class="fa fa-shopping-cart"></i> Productos</a></li>
+          <li id="tipos-movimientos"><a routerLink="tipos-movimientos"><i class="fa fa-ioxhost"></i> Tipos de movimientos</a></li>
+          <li id="sucursales"><a routerLink="sucursales"><i class="fa fa-building-o"></i> Sucursales</a></li>
+          <li id="servicios" ><a routerLink="servicios"><i class="fa fa-list"></i> Servicios</a></li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a href="#">
+            <i class="fa fa-folder-open"></i>
+            <span>Documentos</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+        <ul class="treeview-menu">
+          <li id="facturas"><a routerLink="facturas"><i class="fa fa-files-o"></i> Facturas</a></li>
+          <li id="nueva-factura"><a routerLink="facturas/nuevo"><i class="fa fa-file-text"></i> Nueva Factura</a></li>
+          <li id="facturas"><a routerLink="cotizaciones"><i class="fa fa-files-o"></i> Cotizaciónes</a></li>
+          <li id="facturas"><a routerLink="cotizaciones/nuevo"><i class="fa fa-files-o"></i> Nueva Cotización</a></li>
+          <li id="comprobantes"><a><i class="fa fa-credit-card-alt"></i> Comprobante de pagos</a></li>
+        </ul>
+      </li>
+      <!-- <li class="treeview">
+        <a href="#">
+          <i class="fa fa-cart-plus"></i>
+          <span>Punto de Venta</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li id="cajas"><a routerLink="cajas"><i class="fa fa-calculator"></i> Cajas</a></li>
+          <li id="cajas-nueva"><a routerLink="cajas/nueva"><i class="fa fa-plus"></i> Nueva Caja</a></li>
+          <li id="facturas"><a routerLink="turnos"><i class="fa fa-lock"></i> Turnos</a></li>
+          <li id="facturas"><a routerLink="turnos/nuevo"><i class="fa fa-plus"></i> Nuevo Turno</a></li>
+          <li><a routerLink="ventas"><i class="fa fa-usd"></i> Ventas del dia</a></li>
+          <li><a routerLink="turnos/seleccionar"><i class="fa fa-barcode"></i> Punto de venta</a></li>
+        </ul>
+      </li> -->
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-line-chart"></i>
+          <span>Reportes</span>
+          <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+          <li id="facturas"><a routerLink="reportes/clientes"><i class="fa fa-users"></i> Clientes</a></li>
+          <li id="nueva-factura"><a routerLink="reportes/productos"><i class="fa fa-shopping-cart"></i> Productos</a></li>
+          <li id="comprobantes"><a routerLink="reportes/facturas"><i class="fa fa-files-o"></i> Facturas</a></li>
+          <li id="comprobantes"><a routerLink="reportes/equipos"><i class="fa fa-truck"></i> Equipos</a></li>
+          <li id="comprobantes"><a routerLink="reportes/servicios"><i class="fa fa-list"></i> Servicios</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul *ngIf="user?.Tipo==='cliente-cliente'" class="sidebar-menu">
+      <li class="header">Menu de Navegacion</li>
+      <li>
+        <a routerLink="dashboard">
+            <i class="fa fa-home"></i> <span>Inicio</span>
+        </a>
+      </li>
+      <li class="active treeview">
+        <a>
+            <i class="fa fa-list"></i> <span>Catalogos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        <ul class="treeview-menu">
+          <li id="equipos" ><a routerLink="cliente-equipos"><i class="fa fa-empire"></i> Equipos</a></li>
+          <li id="servicios" ><a routerLink="cliente-servicios"><i class="fa fa-steam-square"></i> Servicios</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>

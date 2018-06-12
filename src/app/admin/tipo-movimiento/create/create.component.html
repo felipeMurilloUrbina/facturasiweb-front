@@ -1,0 +1,83 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Tipo de Movimiento
+      <small>Nuevo</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li>Tipos de Movimientos</li>
+      <li class="active">Nuevo</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+            </div>
+          </div>
+          <div class="row set-top-row">
+            <div class="col-xs-8 col-xs-offset-2">
+              Tipo de Movimiento
+            </div>
+          </div>
+          <div class="row set-top-row">
+            <div class="col-xs-8 col-xs-offset-2">
+              <label class="checkbox-inline"><input type="checkbox" [checked]="tipoMovimiento.Tipo === 'e' ? true : false" (change)="tipoMovimiento.Tipo = $event.target.value"  value="e">Entrada</label>
+              <label class="checkbox-inline"><input type="checkbox" [checked]="tipoMovimiento.Tipo === 's' ? true : false" (change)="tipoMovimiento.Tipo = $event.target.value"  value="s">Salida</label>
+              <label class="checkbox-inline"><input type="checkbox" [checked]="tipoMovimiento.Tipo === 't' ? true : false" (change)="tipoMovimiento.Tipo = $event.target.value"  value="t">Transferencia</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="codigo">Codigo:</label>
+                <input type="text" class="form-control" id="codigo" [(ngModel)]="tipoMovimiento.Codigo" placeholder="Escriba el codigo">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="descripcion">Descripcion:</label>
+                <input type="text" class="form-control" id="descripcion" [(ngModel)]="tipoMovimiento.Descripcion" placeholder="Escriba la descripcion">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="descripcion">Clasificación:</label>
+                <select  id="subtipoMovimientoId"  class="form-control select2" [(ngModel)]="tipoMovimiento.Clasificacion" style="width: 100%;" required>
+                  <option value ="" selected="selected">*Seleccione la Clasificación</option>
+                  <option value ="Compra">Compra</option>
+                  <option value ="Ajuste">Ajuste</option>
+                  <option value ="Devolucion">Devolución</option>
+                  <option value ="Traspaso">Traspaso</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <footer class="container-fluid text-center">
+      <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:center" routerLink="/admin/tipos-movimientos"  class="ui-button-danger" label="Cancelar tipo de movimiento">
+      </button>
+      <button type="button" pButton icon="fa-check" style="float:center" (click)="guardar()" label="Guardar tipo de movimiento">
+      </button>
+    </footer>
+  </section>
+  <!-- /.content -->
+</div>

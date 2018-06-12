@@ -1,0 +1,10 @@
+<p-dialog header="Consulta de Clientes" [(visible)]="visible" modal="modal" width="800" [responsive]="true" (onHide)="cerrar()">
+  <p-dataTable [value]="clientes" [rows]="12" scrollable="true"
+      emptyMessage="No registros" (onRowClick)="seleccionar($event)" scrollHeight="360px"
+      [paginator]="true" [responsive]="true" selectionMode="single">
+    <p-header>Clientes</p-header>
+    <p-column field="Id" header="Codigo" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+    <p-column field="Descripcion" header="Descripción" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+    <p-column field="Rfc" header="RFC " [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+  </p-dataTable>
+</p-dialog>

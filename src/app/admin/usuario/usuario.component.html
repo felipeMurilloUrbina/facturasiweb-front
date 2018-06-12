@@ -1,0 +1,91 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Usuarios</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">Usuarios</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Small boxes (Stat box) -->
+        <p-table [value]="usuarios" emptyMessage="No hay Usuarios" [scrollable]="true" scrollHeight="300px" [responsive]="true" [rows]="20"
+          [paginator]="true" #dt>
+          <ng-template pTemplate="caption">
+            <div class="ui-helper-clearfix">
+              <button type="button" pButton icon="fa-file-o" iconPos="left" label="Exportar" (click)="dt.exportCSV()" style="float:left"></button>
+              <button type="button" pButton icon="fa-refresh" iconPos="left" label="Refrescar" (click)="get()" style="float:left"></button>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th>Codigo</th>
+              <th>Nombre Completo</th>
+              <th>Nombre Usuario</th>
+              <th>Fecha</th>
+              <th>Estatus</th>
+              <th>Acciones</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-usuario>
+            <tr>
+              <td>{{ usuario.Id}}</td>
+              <td>{{ usuario.NombreCompleto }}</td>
+              <td>{{ usuario.NombreUsuario }}</td>
+              <td>{{ usuario.FechaCreacion | date: 'dd/MM/y' }}</td>
+              <td>
+                <p-inputSwitch [(ngModel)]="usuario.Activo" onLabel="Activo" offLabel="Baja" (onChange)="cambiarEstatus($event, usuario)"></p-inputSwitch>
+              </td>
+              <td>
+                <div class="text-center">
+                  <button type="button" pButton (click)="cancelar(fact)" icon="fa-ban"></button>
+                  <button type="button" pButton (click)="descargarPDF(fact)" icon="fa-file-pdf-o"></button>
+                  <button type="button" pButton (click)="descargarXML(fact)" icon="fa fa-code"></button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary" let-rowData>
+            <div style="text-align:left">
+              <button type="button" pButton icon="fa-plus" routerLink="nuevo" routerLinkActive="active" label="Nueva Usuario"></button>
+            </div>
+          </ng-template>
+        </p-table>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- <div class="modal fade" tabindex="-1" role="dialog" id="modal-deactive-delete" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h2 class="modal-title text-success">Eliminar Cliente</h2>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de eliminar el registro?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" (click)="eliminarSuc()" data-dismiss="modal">Aceptar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        </div>
+    </div>
+  </div>
+</div> -->

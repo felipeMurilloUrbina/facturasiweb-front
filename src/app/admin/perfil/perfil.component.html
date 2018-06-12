@@ -1,0 +1,111 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Perfil
+      <small></small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard">
+      </i> Perfil</a></li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- /.row -->
+    <div class="row">
+      <div *ngIf="configForm" class="row">
+          <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+            </div>
+              <div class="box-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="box box-primary">
+                      <div class="box-body box-profile">
+                        <img class="profile-user-img img-responsive img-circle" src="{{_service.getUrlAbsoluta() + user?.Avatar}}" alt="User profile picture">
+
+                        <h3 class="profile-username text-center">{{user?.NombreCompleto}}</h3>
+
+                        <a href="#" (click)="cambiarContra()"><p class="text-muted text-center">Cambiar Contraseña...</p></a>
+
+                        <ul class="list-group list-group-unbordered">
+                          <li class="list-group-item">
+                            <b>+Timbres Comprados</b> <a class="pull-right">{{usuarioConfig.TimbresComprados}}</a>
+                          </li>
+                          <li class="list-group-item">
+                            <b>-Timbres Utilizados</b> <a class="pull-right">{{usuarioConfig.TimbresUsados}}</a>
+                          </li>
+                          <li class="list-group-item">
+                              <b>-Timbres Disponibles</b> <a class="pull-right">{{usuarioConfig.TimbresDisponibles}}</a>
+                            </li>
+                        </ul>
+
+                        <a href="#" class="btn btn-primary btn-block"><b>{{user?.NombreUsuario}}</b></a>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <form [formGroup]="configForm" (ngSubmit)="guardar()" ngNativeValidate>
+                    <div class="box box-primary">
+                      <div class="box-header">
+                        <h3 class="box-title">Configuracion del correo</h3>
+                      </div>
+                      <div class="box-body">
+                        <!-- Date -->
+                        <div class="form-group">
+                          <label>Asunto:</label>
+                          <div class="input-group date">
+                            <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" formControlName="Asunto" class="form-control pull-right" id="datepicker">
+                          </div>
+                          <!-- /.input group -->
+                        </div>
+                        <!-- /.form group -->
+                        <div class="box-body pad">
+                            <textarea  id="mensaje" class="form-control" formControlName="Mensaje" cols="30" rows="7"></textarea>
+                        </div>
+                      </div>
+                      <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+    </div>
+    <!-- /.row (main row) -->
+  </section>
+  <!-- /.content -->
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-deactive-delete" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h2 class="modal-title text-success">Cambiar Contraseña</h2>
+          </div>
+          <div class="modal-body">
+            <p>¿Nueva Contraseña:
+              <input type="password" class="form-control" [(ngModel)]="nuevaContra"/>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success" (click)="cambiarPassword()" data-dismiss="modal">Aceptar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
+      </div>
+    </div>
+  </div>

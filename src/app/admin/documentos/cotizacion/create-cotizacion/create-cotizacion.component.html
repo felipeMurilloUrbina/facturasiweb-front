@@ -1,0 +1,239 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Cotización
+      <small>Nueva</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li>Cotización</li>
+      <li class="active">Nuevo</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <section id="cotizacion" class="invoice">
+      <!-- title row -->
+      <div class="row invoice-info">
+        <div class="col-sm-6 invoice-col">
+          <h2 class="text-primary">Cotización: {{cotizacion.Serie + '-' + cotizacion.Folio}}</h2>
+          <address *ngIf="cotizacion.Sucursal">
+            <i class="fa fa-globe"></i> Sucursal:
+            <input type="text" id="Sucursal" value="{{cotizacion.Sucursal.Descripcion}}" class="form-control" readonly>
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6 invoice-col">
+          Cliente:
+          <address *ngIf="cotizacion.Cliente">
+            <strong>{{cotizacion.Cliente?.Descripcion}}</strong><br>
+            <strong>{{cotizacion?.Cliente?.Rfc}}</strong><br>
+            {{cotizacion?.Cliente?.Calle}}<br>
+            {{cotizacion?.Cliente?.Ciudad}}, {{cotizacion?.Cliente?.Municipio}}, {{cotizacion?.Cliente?.Estado + ' ' + cotizacion?.Cliente?.CodigoPostal}}<br>
+            {{cotizacion?.Cliente?.Pais}}<br><button type="button" pButton icon="fa-search" (click)= "onConsultarCliente() " label="Cambiar Cliente..."></button>
+          </address>
+          <address *ngIf="!cotizacion.Cliente">
+            <strong>Seleccione un cliente....</strong><button type="button" pButton icon="fa-search" (click)= "onConsultarCliente() " label="Buscar...."></button><br>
+          </address>
+        </div>
+      </div>
+      <!-- info row -->
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-xs-12 table-responsive">
+          <p-table [value]="cotizacion.Detalles" emptyMessage= "No hay Detalles" [scrollable]="true" scrollHeight="{{height}}" [responsive]="true" [rows]="20" [paginator]="true" #dt>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th style="width:10%">Codigo</th>
+                <th style="width:30%">Descripcion</th>
+                <th style="width:10%">Cantidad</th>
+                <th style="width:10%">Descuento</th>
+                <th style="width:10%">Prec. Unit.</th>
+                <th style="width:10%">Total</th>
+                <th style="width:12%">Acciones</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-det>
+              <tr>
+                <td style="width:10%">{{ det.Codigo }}</td>
+                <td style="width:30%" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input type="text" [(ngModel)]="det.Descripcion">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      <p class="text-justify">
+                        {{ det.Descripcion }}
+                      </p>
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width:10%" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input type="number" step="any" [(ngModel)]="det.Cantidad">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{ det.Cantidad }}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width:10%">{{ det.TasaDesc }}</td>
+                <td style="width:10%" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input type="number" step="any" [(ngModel)]="det.Precio">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      ${{ det.Precio | number: '1.2-2' }}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width:10%">${{ det.Importe | number: '1.2-2' }}</td>
+                <td style="width:12%">
+                  <div class="text-center">
+                    <button type="button" pButton (click)="editar(detalle)" icon="fa-pencil"></button>
+                    <button type="button" pButton (click)="agregarComplemento(detalle)" icon="fa-plus"></button>
+                    <button type="button" pButton (click)="eliminar(detalle)" icon="fa-trash-o"></button>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="summary" let-rowData>
+              <div style="text-align:left">
+                <button type="button" pButton icon="fa-plus" (click)="onConsultarProducto()" routerLinkActive="active" label="Agregar Producto"></button>
+              </div>
+            </ng-template>
+          </p-table>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-xs-8">
+          <div class="row margin-left">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label>Formas de pagos:</label>
+                <select class="form-control select2" (change)="onCambioMetodo($event.target.value)" [(ngModel)] ="cotizacion.FormaPagoId" style="width: 100%;">
+                  <option value ="0" selected>[*Seleccione una forma de pago]</option>
+                  <option  value="{{metodo.Id}}" *ngFor="let metodo of formaPagos">{{metodo.Descripcion}}</option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="tieneCuenta" class="col-xs-6">
+              <div class="form-group">
+                <label>Numero de cuenta:</label>
+                <input  type="text" class="form-control" name="" [(ngModel)] ="cotizacion.NoCuentaPago" placeholder="Numero de cuenta">
+              </div>
+            </div>
+          </div>
+          <div class="row margin-left">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label>Metodos de pago:</label>
+                <select class="form-control select2" [(ngModel)] ="cotizacion.MetodoPagoId" style="width: 100%;">
+                  <option value ="0" selected>[*Seleccione un metodo de pago]</option>
+                  <option value="{{metodo.Id}}" *ngFor="let metodo of metodoPagos">{{metodo.Descripcion}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label>Condiciones de  pago:</label>
+                <input  type="text" class="form-control" name="" [(ngModel)] ="cotizacion.PagoEn" placeholder="Condiciones de pago">
+              </div>
+            </div>
+          </div>
+          <div class="row margin-left">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label>Observaciones:</label>
+                <textarea class="form-control" [(ngModel)] ="cotizacion.Observacion"></textarea>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="cotizacion.Id" class="row margin-left">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <div  class="row">
+                  <div class="col-md-12">
+                    <p-fileUpload name="myfile[]" [url]="url" (onBeforeSend)="antesEnviar($event)" (onError)="onError($event)" (onUpload)="onUpload($event)" chooseLabel = "Eliga el archivo a subir" uploadLabel="Subir" cancelLabel ="Cancelar"></p-fileUpload>
+                  </div>
+                </div>
+                <div *ngIf="cotizacion.Archivos && cotizacion.Archivos.length>0" class="row">
+                  <div class="col-md-12">
+                    <h5><a (click)="verArchivos()">Ver los archivos cargados</a></h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <p class="lead">Totales de Cotizacion</p>
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th style="width:50%; text-align: right;">Subtotal  0%:</th>
+                <td style="text-align: right;">${{(cotizacion.SubtotalE ? cotizacion.SubtotalE : 0) | number : '1.2-2' }}</td>
+              </tr>
+              <tr>
+                <th style="width:50%; text-align: right;">Subtotal 16%:</th>
+                <td style="text-align: right;">${{ (cotizacion.SubtotalG ? cotizacion.SubtotalG : 0) | number : '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <th style="width:50%; text-align: right;">Importe:</th>
+                <td style="text-align: right;">${{ (cotizacion.Importe ? cotizacion.Importe : 0) | number : '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <th style="text-align: right;">Ieps</th>
+                <td style="text-align: right;">${{(cotizacion.Ieps ? cotizacion.Ieps : 0) | number : '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <th style="text-align: right;">Iva (16 %)</th>
+                <td style="text-align: right;">${{(cotizacion.Iva ? cotizacion.Iva : 0) | number : '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <th style="text-align: right;">
+                  Ret. Iva:
+                </th>
+                <td style="text-align: right;">${{(cotizacion.RetIva? cotizacion.RetIva : 0) | number : '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <th style="text-align: right;">Ret ISR:</th>
+                <td style="text-align: right;">${{(cotizacion.RetIsr ? cotizacion.RetIsr : 0) | number : '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <th style="text-align: right;">Total:</th>
+                <td style="text-align: right;">${{(cotizacion.Total? cotizacion.Total : 0) | number : '1.2-2'}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      <!-- this row will not appear when printing -->
+      <div class="row no-print">
+        <div class="col-xs-12">
+          <button type="button" pButton icon="fa-credit-card" style="float:right" (click)="guardar()" label="Guardar">
+          </button>
+          <button type="button" pButton icon="fa-credit-card" style="float:right" (click)="guardar()" label="Guardar y Salir">
+          </button>
+          <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:right" (click)="regresar()"  class="ui-button-danger" label="Cancelar  cotizacion">
+          </button>
+        </div>
+      </div>
+    </section>
+  </section>
+  <!-- /.content -->
+</div>
+<app-consulta-producto [(visible)]="consultaProducto" [(productos)]="productos" (emitter)="seleccionarProducto($event)"></app-consulta-producto>
+<app-consulta-archivo [(visible)]="consultaArchivo" [(cotizacion)]="cotizacion"></app-consulta-archivo>
+<app-consulta-cliente [(visible)]="consultaCliente" (emitter)="selecccionarCliente($event)"></app-consulta-cliente>
+<app-modificacion-producto [(visible)]="modificaProducto" [producto]="producto" (emitter)="guardarProducto($event)"></app-modificacion-producto>

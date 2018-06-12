@@ -1,0 +1,39 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Nueva Caja
+      <small></small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li>Caja</li>
+      <li class="active">Nueva</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="descripcion">Descripcion:</label>
+                <input type="text" class="form-control" id="descripcion" [(ngModel)]="caja.Descripcion" placeholder="Escriba la Colonia">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="container-fluid text-center">
+      <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:center" routerLink="/admin/cajas"  class="ui-button-danger" label="Cancelar Caja">
+      </button>
+      <button type="button" pButton icon="fa-check" style="float:center" (click)="guardar()" label="Guardar  Caja">
+      </button>
+    </footer>
+  </section>
+  <!-- /.content -->
+</div>

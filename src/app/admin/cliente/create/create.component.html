@@ -1,0 +1,95 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{titulo}}</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">{{titulo}}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Small boxes (Stat box) -->
+        <div class="box box-primary">
+          <div class="box-body">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label for="descripcion">Razón Social:</label>
+                    <input type="text" class="form-control" id="descripcion" [(ngModel)]="cliente.Descripcion" placeholder="Escriba el Razon Social">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="rfc">RFC:</label>
+                    <input type="text" class="form-control" id="rfc" [(ngModel)]="cliente.Rfc" placeholder="Escriba la RFC">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="descripcion">Correo:</label>
+                    <div class="input-group">
+                      <input type="email" [(ngModel)]="correo" class="form-control" id="correo" placeholder="Escriba el Correo">
+                      <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="button" (click)="agregarCorreo()">Agregar!</button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <ul class="list-group">
+                    <li class="list-group-item justify-content-between" *ngFor="let correo of correos">
+                      {{correo}}
+                      <span class="badge badge-default badge-pill" (click)="cerrar(correo)">X</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div *ngIf="cliente?.Id" class="row">
+                <div class="col-md-12">
+                  <p-accordion (onOpen)="onTabOpen($event)">
+                    <p-accordionTab header="Facturas">
+                      <div *ngIf="cargarFactura">
+                        <app-tabla-factura [clienteId]="cliente.Id"></app-tabla-factura>
+                      </div>
+                    </p-accordionTab>
+                    <p-accordionTab header="Notas de Venta">
+                    </p-accordionTab>
+                  </p-accordion>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="container-fluid text-center">
+          <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:center" routerLink="/admin/clientes" class="ui-button-danger"
+            label="Cancelar Cliente">
+          </button>
+          <button type="button" pButton icon="fa-check" style="float:center" (click)="guardar()" label="Guardar  Cliente">
+          </button>
+        </footer>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>

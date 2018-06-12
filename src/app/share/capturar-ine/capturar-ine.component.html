@@ -1,0 +1,101 @@
+
+
+<p-dialog header="Consulta de Clientes" [(visible)]="visible" modal="modal" width="800" [responsive]="true">
+  <div *ngIf="visible" class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="tasa-iva">Tipo Proceso:</label>
+          <select class="form-control" [(ngModel)]="ine.TipoProceso" id="tasa-iva" required>
+            <option value="">[Seleccione un tipo de proceso]</option>
+            <option value="Ordinario">Ordinario</option>
+            <option value="PreCampaña">Precampaña</option>
+            <option value="Campaña">Campaña</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="estado">Clave Entidad:</label>
+          <select class="form-control select2" id="estado" [(ngModel)]="ine.ClaveEntidad" style="width: 100%;" required>
+            <option value ="" selected="selected">*Seleccione un estado</option>
+            <option value ="GRO" selected="selected">Guerrero</option>
+            <option value ="BCS">Baja California Sur</option>
+            <option value ="QTO">Querétaro</option>
+            <option value ="DGO">Durango</option>
+            <option value ="NLE">Nuevo León</option>
+            <option value ="TAB">Tabasco</option>
+            <option value ="SLP">San Luis Potosí</option>
+            <option value ="MEX">México</option>
+            <option value ="PUE">Puebla</option>
+            <option value ="YUC">Yucatán</option>
+            <option value ="VER">Veracruz</option>
+            <option value ="MIC">Michoacán</option>
+            <option value ="CHP">Chiapas</option>
+            <option value ="ROO">Quintana Roo</option>
+            <option value ="AGU">Aguascalientes</option>
+            <option value ="NAY">Nayarit</option>
+            <option value ="TLA">Tlaxcala</option>
+            <option value ="JAL">Jalisco</option>
+            <option value ="HID">Hidalgo</option>
+            <option value ="GUA">Guanajuato</option>
+            <option value ="SONO">Sonora</option>
+            <option value ="COL">Colima</option>
+            <option value ="OAZ">Oaxaca</option>
+            <option value ="ZAC">Zacatecas</option>
+            <option value ="CHH">Chihuahua</option>
+            <option value ="SIN">Sinaloa</option>
+            <option value ="MOR">Morelos</option>
+            <option value ="BCN">Baja California</option>
+            <option value ="COA">Coahuila de Zaragoza</option>
+            <option value ="Ciudad de México">Ciudad de México</option>
+            <option value ="CAM">Campeche</option>
+            <option value ="TAM">Tamaulipas</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="tipo-comite">Tipo de comite:</label>
+          <select class="form-control" [(ngModel)]="ine.TipoComite" id="tipo-comite" required>
+            <option value="">[Seleecione el tipo de comite]</option>
+            <option value="Ejecutivo Estatal">Ejecutivo Estatal</option>
+            <option value="Ejecutivo Nacional">Ejecutivo Nacional</option>
+            <option value="Ejecutivo Nacional">Directivo Estatal</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="tipo-comite">Ambito:</label>
+          <select class="form-control" [(ngModel)]="ine.Ambito" id="ambito" required>
+            <option value="">[Seleecione el ambito]</option>
+            <option value="Local">>Local</option>
+            <option value="Federal">Federal</option>
+          </select>
+        </div>
+      </div>
+  </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="id-contabilidad">Id de Contabilidad:</label>
+          <input type="text" class="form-control" id="id-contabilidad" [(ngModel)]="ine.ContabilidadId" placeholder="Escriba el id contabilidad"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="container-fluid text-center">
+    <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:center" (click)="cancelar()"  class="ui-button-danger" label="Cancelar">
+    </button>
+    <button type="button" pButton icon="fa-check" style="float:center" (click)="guardar()" label="Guardar Complemento">
+    </button>
+  </footer>
+</p-dialog>
+

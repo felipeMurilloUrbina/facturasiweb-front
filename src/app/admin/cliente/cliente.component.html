@@ -1,0 +1,130 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Clientes</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">Clientes</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="container-fluid">
+      <div class="row">
+        <p-table [columns]="cols" [value]="clientes" emptyMessage="No hay clientes" [scrollable]="true" scrollHeight="{{height}}"
+          [responsive]="true" [rows]="20" [paginator]="true" #dt>
+          <ng-template pTemplate="caption">
+            <div style="text-align: right">
+              <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+              <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                style="width:auto">
+            </div>
+            <div class="ui-helper-clearfix">
+              <button type="button" pButton icon="fa-file-o" iconPos="left" label="Exportar" (click)="dt.exportCSV()" style="float:left"></button>
+              <button type="button" pButton icon="fa-refresh" iconPos="left" label="Refrescar" (click)="get()" style="float:left"></button>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns">{{col.header}}</th>
+              <th>Acciones</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-renglon let-columns="columns">
+            <tr [pSelectableRow]="renglon">
+              <td *ngFor="let col of columns">
+                {{_service.resolveFieldData(renglon, col.field)}}
+              </td>
+              <td>
+                <div class="text-center">
+                  <button type="button" pButton (click)="asignarUsuario(renglon)" icon="fa-user-plus"></button>
+                  <button type="button" pButton (click)="editar(renglon)" icon="fa-pencil"></button>
+                  <button type="button" pButton (click)="eliminar(renglon)" icon="fa-trash-o"></button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="summary" let-rowData>
+            <div style="text-align:left">
+              <button type="button" pButton icon="fa-plus" routerLink="nuevo" routerLinkActive="active" label="Nuevo Cliente"></button>
+            </div>
+          </ng-template>
+        </p-table>
+      </div>
+      <!-- /.row -->
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-deactive-delete">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h2 class="modal-title text-success">Eliminar Cliente</h2>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de eliminar el registro?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success" (click)="eliminarSuc()" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Crear Usuario para cliente" [(visible)]="visible" modal="modal" width="1200" [responsive]="true">
+  <div *ngIf="usuario" class="box box-primary">
+    <div class="box-body">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="codigo">Usuario:</label>
+              <input type="text" class="form-control" id="codigo" [(ngModel)]="usuario.NombreUsuario" placeholder="Escriba el nombre usuario">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="contra">Contraseña:</label>
+              <input type="password" class="form-control" id="contra" [(ngModel)]="usuario.Contra" placeholder="Escriba la descripción">
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="repetir-contra">Repetir Contraseña:</label>
+                  <input type="password" class="form-control" id="repetir-contra" [(ngModel)]="usuario.Contra" placeholder="Escriba la descripción">
+                </div>
+              </div>
+            </div> -->
+      </div>
+    </div>
+    <footer class="container-fluid text-center">
+      <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:center" (click)="regresar()" class="ui-button-danger"
+        label="Cancelar">
+      </button>
+      <button type="button" pButton icon="fa-check" style="float:center" (click)="guardarUsuario()" label="Registrar Usuario">
+      </button>
+    </footer>
+  </div>
+</p-dialog>

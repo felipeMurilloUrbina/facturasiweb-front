@@ -1,0 +1,50 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Reporte de Productos
+      <small></small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li>Reportes</li>
+      <li class="active">Productos</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <p-dataTable #dt [value]="clientes" emptyMessage= "No hay Clientes" scrollable="true" scrollHeight="300px" [responsive]="true" [rows]="8" [paginator]="true" #dt>
+      <p-header>
+        <div class="ui-helper-clearfix">
+            <button type="button" pButton icon="fa-file-o" iconPos="left" label="Exportar" (click)="dt.exportCSV()" style="float:left"></button>
+        </div>
+      </p-header>
+      <p-column field="Id" header = "Codigo"></p-column>
+      <p-column field="Descripcion" header="Razon Social"  [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+      <p-column field="Rfc" header="RFC"  [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+      <p-column field="Calle" header="Calle"  [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+       <p-column field="CodigoPostal" header="CodigoPostal"  [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+      <p-column styleClass="col-button">
+        <ng-template pTemplate="header">
+          <button type="button" pButton icon="fa-refresh" (click)="get()"></button>
+        </ng-template>
+        <ng-template let-suc="rowData" pTemplate="body">
+          <div class="text-center">
+              <button type="button" pButton (click)="asignarUsuario(suc)" icon="fa-user-plus"></button>
+            <button type="button" pButton (click)="editar(suc)" icon="fa-pencil"></button>
+            <button type="button" pButton (click)="eliminar(suc)" icon="fa-trash-o"></button>
+          </div>
+        </ng-template>
+      </p-column>
+      <p-footer>
+        <div class="ui-helper-clearfix" style="width:100%">
+          <button type="button" pButton icon="fa-plus" style="float:left" routerLink="nuevo" label="Nuevo cliente">
+          </button>
+        </div>
+      </p-footer>
+    </p-dataTable>
+  </section>
+  <!-- /.content -->
+</div>

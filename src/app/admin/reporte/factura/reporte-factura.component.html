@@ -1,0 +1,56 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Reportes Facturas
+      <small></small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li>Reportes</li>
+      <li class="active">Facturas</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+      <div class="box box-primary">
+          <div class="box-body">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  Clientes:<br/>
+                  <p-multiSelect defaultLabel="Elija los clientes" filterPlaceHolder="Escriba la razon social" selectedItemsLabel="{0} Clientes" [options]="clientes" [(ngModel)]="clientesSeleccionados" optionLabel="Descripcion"></p-multiSelect>
+                </div>
+                <div class="col-md-4">
+                  Tipo de Venta:<br/>
+                  <p-multiSelect defaultLabel="Elija la venta" filterPlaceHolder="Escriba la forma de pago" selectedItemsLabel="{0} Tipo de Ventas" [options]="formaPagos" [(ngModel)]="formaPagoSeleccionado" optionLabel="Descripcion"></p-multiSelect>
+                </div>
+                <div class="col-md-2">
+                  Inicio:<br/>
+                  <p-calendar [(ngModel)]="inicio" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" [locale]="es" dateFormat="dd/mm/yy"></p-calendar>
+                </div>
+                <div class="col-md-2">
+                  Fin:<br/>
+                  <p-calendar [(ngModel)]="fin"  [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" [locale]="es" dateFormat="dd/mm/yy"></p-calendar>
+                </div>
+              </div>
+              <div class="row margin-top" style="margin-top:2%;">
+                <div class="container-fluid text-center">
+                  <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:center" routerLink="/admin/dashboard"  class="ui-button-danger" label="Regresar">
+                  </button>
+                  <button type="button" pButton icon="fa-check" style="float:center" (click)="getFacturas()" label="Buscar Facturas">
+                  </button>
+                </div>
+              </div>
+              <div class="row margin-top " style="margin-top:2%;">
+                <table id="tabla" class="display" cellspacing="0" width="100%">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+    <!-- Small boxes (Stat box) -->
+  </section>
+  <!-- /.content -->
+</div>
+

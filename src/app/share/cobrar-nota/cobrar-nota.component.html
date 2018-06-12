@@ -1,0 +1,56 @@
+<p-dialog  [(visible)]="visible" modal="modal" width="800" [responsive]="true">
+    <p-header><h1>Cobrar Venta</h1></p-header>
+      <table *ngIf="puntoVenta" class="table table-striped">
+        <thead>
+          <tr>
+            <th style="width:50%; text-align: right; font-size:20pt;">TOTAL:</th>
+            <td style="text-align: right; font-size:22pt;">${{ puntoVenta?.Total | number : '1.2-2' }}</td>
+          </tr>
+          <tr>
+            <th style="width:50%; text-align: right; font-size:18pt;">EFECTIVO:</th>
+            <td style="text-align: right; font-size:22pt;">
+              <div class="form-group">
+                <input class="form-control input-lg" id="inputlg" [(ngModel)]="puntoVenta.DineroEnEfectivo" type="number">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th style="width:50%; text-align: right; font-size:20pt;">TARJETA :</th>
+            <td style="text-align: right; font-size:22pt;">
+              <div class="form-group">
+                <input class="form-control input-lg" id="inputlg" [(ngModel)]="puntoVenta.DineroEnTarjeta" type="number">
+              </div>
+          </td>
+          </tr>
+          <tr>
+            <th style="width:50%; text-align: right; font-size:20pt;">CUPONES :</th>
+            <td style="text-align: right; font-size:22pt;">
+              <div class="form-group">
+                <input class="form-control input-lg" id="inputlg" [(ngModel)]="puntoVenta.DineroEnCupones" type="number">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th style="width:50%; text-align: right; font-size:20pt;">VALES :</th>
+            <td style="text-align: right; font-size:22pt;">
+              <div class="form-group">
+                <input class="form-control input-lg" id="inputlg" [(ngModel)]="puntoVenta.DineroEnVales" type="number">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th style="width:50%; text-align: right; font-size:20pt;">Cambio :</th>
+            <td style="text-align: right; font-size:22pt;">
+              <div class="form-group">
+                <input class="form-control input-lg" id="inputlg" [(ngModel)]="puntoVenta.Cambio" type="number" readonly>
+              </div>
+            </td>
+          </tr>
+        </thead>
+      </table>
+         <p-footer>
+            <button type="button" pButton icon="fa-check" (click)="cobrar(1)" label="Cobrar"></button>
+            <button type="button" pButton icon="fa-check" (click)="cobrar(2)" label="Cobrar y Imprimir"></button>
+            <button type="button" pButton icon="fa-close" (click)="cancelar()" label="Cancelar"></button>
+         </p-footer>
+</p-dialog>

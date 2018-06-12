@@ -1,0 +1,74 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Equipos</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">Equipos</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <p-dataTable #dt [value]="equipos" emptyMessage= "No hay Equipos" scrollable="true" scrollHeight="300px" [responsive]="true" [rows]="8" [paginator]="true" #dt>
+      <p-header>
+        <div class="ui-helper-clearfix">
+          <button type="button" pButton icon="fa-file-o" iconPos="left" label="Exportar" (click)="dt.exportCSV()" style="float:left"></button>
+          <button type="button" pButton icon="fa-file-o" iconPos="left" label="Refrescar" (click)="get()" style="float:left"></button>
+        </div>
+      </p-header>
+      <p-column field="Id" header = "Codigo"></p-column>
+      <p-column field="Descripcion" header="Descripcion"  [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+      <p-column field="Anio" header="Año"  [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+      <p-column field="Modelo" header="Modelo"  [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+       <p-column field="Marca" header="Marca"  [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+      <p-column styleClass="col-button">
+        <ng-template pTemplate="header">
+          <button type="button" pButton icon="fa-refresh" (click)="get()"></button>
+        </ng-template>
+        <ng-template let-equipo="rowData" pTemplate="body">
+          <div class="text-center">
+            <button type="button" pButton (click)="editar(equipo)" icon="fa-pencil"></button>
+            <button type="button" pButton (click)="eliminar(equipo)" icon="fa-trash-o"></button>
+          </div>
+        </ng-template>
+      </p-column>
+      <p-footer>
+        <div class="ui-helper-clearfix" style="width:100%">
+          <button type="button" pButton icon="fa-plus" style="float:left" routerLink="nuevo" label="Nuevo equipo">
+          </button>
+        </div>
+      </p-footer>
+    </p-dataTable>
+  </section>
+  <!-- /.content -->
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-deactive-delete" >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h2 class="modal-title text-success">Eliminar equipo</h2>
+        </div>
+        <div class="modal-body">
+          <p>¿Estás seguro de eliminar el registro?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" (click)="eliminarSuc()" data-dismiss="modal">Aceptar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        </div>
+    </div>
+  </div>
+</div>

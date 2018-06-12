@@ -1,0 +1,18 @@
+<p-dialog [(visible)]="visible" modal="modal" width="1000" [responsive]="true" (onHide)="cerrar()">
+  <div class="panel panel-success">
+    <div class="panel-heading">Lista de archivos de la cotizacion: {{cotizacion.Codigo}}</div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <a *ngFor = "let archivo of cotizacion.Archivos"  (click)="getArchivo(archivo)"><li class="list-group-item d-flex justify-content-between align-items-center">
+          {{archivo.NombreFisico}}
+          <span class="badge badge-primary badge-pill"><i class="fa fa-download"></i></span>
+        </li></a>
+      </ul>
+      <div  class="row">
+        <div class="col-md-12">
+          <p-fileUpload name="myfile[]" [url]="url" (onBeforeSend)="antesEnviar($event)" (onError)="onError($event)" (onUpload)="onUpload($event)" chooseLabel = "Eliga el archivo a subir" uploadLabel="Subir" cancelLabel ="Cancelar"></p-fileUpload>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>

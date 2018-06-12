@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+      <label for="calle">Calle:</label>
+      <input type="text" class="form-control" id="calle" [(ngModel)]="cliente.Calle" placeholder="Escriba la calle">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="c-p">Codigo Postal:</label>
+      <input type="text" class="form-control" id="c-p" [(ngModel)]="cliente.CodigoPostal" placeholder="Escriba el codigo postal">
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="colonia">Colonia:</label>
+      <input type="text" class="form-control" id="colonia" [(ngModel)]="cliente.Colonia" placeholder="Escriba la Colonia">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="pais">Pais:</label>
+      <select id="pais" class="form-control select2" [(ngModel)]="cliente.Pais"  style="width: 100%;">
+        <option value ="" selected="selected">*Seleccione la Pais</option>
+        <option value="{{pais.Codigo}}" *ngFor="let pais of paises">{{pais.Descripcion}}</option>
+      </select>
+    </div>
+  </div>
+  <div  *ngIf="cliente.Pais !=='MEX'" class="col-md-6">
+    <div class="form-group">
+      <label for="c-p">Estado:</label>
+      <input type="text" class="form-control" id="c-p" [(ngModel)]="cliente.Estado" placeholder="Escriba el estado">
+    </div>
+  </div>
+  <div *ngIf="cliente.Pais ==='MEX'" class="col-md-3">
+    <div class="form-group">
+      <label for="estado">Estado:</label>
+      <select class="form-control select2" id="estado" [(ngModel)]="cliente.Estado" (change)="onChangeEstado($event.target.value)" style="width: 100%;" required>
+        <option value ="" selected="selected">[*Seleccione un estado] </option>
+        <option *ngFor="let estado of estados" value ="estado">{{estad o}}</option>
+      </select>
+    </div>
+  </div>
+  <div *ngIf="cliente.Pais ==='MEX'" class="col-md-3">
+    <div class="form-group">
+      <label for="municipio">Municipio:</label>
+      <select  id="municipio"  class="form-control select2" [(ngModel)]="cliente.Municipio" (change)="onChangeMun($event.target.value)" style="width: 100%;" required>
+        <option value ="" selected="selected">*Seleccione la municipio</option>
+        <option value="{{municipio}} " *ngFor="let municipio of municipios">{{municipio}}</option>
+      </select>
+    </div>
+  </div>
+  <div *ngIf="cliente.Pais ==='MEX'" class="col-md-3">
+    <div class="form-group">
+      <label for="ciudad">Ciudad:</label><br/>
+      <p-autoComplete [(ngModel)]="cliente.Ciudad" id="ciudad" [minLength]="3" [size]="35" [suggestions]="localidadesString" (completeMethod)="buscar($event)" (onSelect) ="select($event)"></p-autoComplete >
+    </div>
+  </div>
+</div>

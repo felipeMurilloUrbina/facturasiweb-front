@@ -1,0 +1,73 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Usuario
+      <small>Nuevo</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li>Usuarios</li>
+      <li class="active">Nuevo</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" [(ngModel)]="usuario.Nombre" placeholder="Escriba el Nombre" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="rfc">Apellido:</label>
+                <input type="text" class="form-control" id="rfc" [(ngModel)]="usuario.Apellido" placeholder="Escriba el apellido">
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="nombre-usuario">Nombre de Usuario:</label>
+                <input type="text" class="form-control" id="nombre-usuario" [(ngModel)]="usuario.NombreUsuario" placeholder="Escriba la calle">
+              </div>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="nombre-usuario">Nombre de Usuario:</label>
+                <input type="text" class="form-control" id="nombre-usuario" [(ngModel)]="usuario.NombreUsuario" placeholder="Escriba el nombre de usuario">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <label for="contra">Contraseña:</label>
+                <input type="password" class="form-control" id="contra" [(ngModel)]="usuario.Contra" placeholder="Escriba la contraseña">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <footer class="container-fluid text-center">
+      <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:center" routerLink="/admin/usuarios"  class="ui-button-danger" label="Cancelar Usuario">
+      </button>
+      <button type="button" pButton icon="fa-check" style="float:center" (click)="guardar()" label="Guardar  Usuario">
+      </button>
+    </footer>
+  </section>
+  <!-- /.content -->
+</div>

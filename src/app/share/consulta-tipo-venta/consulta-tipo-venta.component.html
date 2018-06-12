@@ -1,0 +1,9 @@
+<p-dialog header="Consulta de Tipo Venta" [(visible)]="visible" modal="modal" width="800" [responsive]="true">
+  <p-dataTable [value]="tipoVentas" [rows]="12" scrollable="true"
+      emptyMessage="No registros" (onRowClick)="seleccionar($event)" scrollHeight="360px"
+      [paginator]="true" [responsive]="true" selectionMode="single">
+    <p-header>Tipos de Venta</p-header>
+    <p-column field="Id" header="Codigo" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+    <p-column field="Descripcion" header="Descripción" [filter]="true" filterPlaceholder="Buscar" filterMatchMode="contains"></p-column>
+  </p-dataTable>
+</p-dialog>
