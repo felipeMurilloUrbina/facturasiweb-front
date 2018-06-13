@@ -23,25 +23,39 @@ export class CustomPreloadingStrategy implements PreloadingStrategy {
 
   preloadDatabase() {
     let datos = [];
-    let pagina = 1;
-    this._service.getGenerico('util/unidades/cantidad').subscribe(dato => {
+    let cantidadRenglones = 1000;
+    let paginas = 0;
+    let promesasUnidades = [];
+    let promesasCatalogo = [];
+    this._service.getGenerico('util/unidades/cantidad').subscribe(cantidad => {
       this._serviceDexi.count('unidades').then((resBD) => {
-        if(dato !== resBD) {
-          //this._serviceDexi.clearAll('unidades');
-          while(datos.length != dato) {
-            this._service.getGenerico('util/unidades/' + pagina + '/250')
-              .subscribe(respuesta =>{
-              console.log(respuesta);
-              datos.push(respuesta.Elementos);
-              pagina++;
-            });
-            delay(13000);
-            console.log(datos.length != dato);
-            console.log(datos);
+        if (cantidad !== resBD) {
+          paginas = cantidad / cantidadRenglones;
+          this._serviceDexi.clearAll('unidades');
+          for (let i = 1; i <= paginas + 1; i++) {
+            promesasUnidades.push(this._service.getPromesasUnidades(i, cantidadRenglones));
           }
-          console.log(datos);
-         }
-      })
+          this._service.getTodosPromesas(promesasUnidades).subscribe(areglo => {
+            console.log(areglo);
+            this._serviceDexi.addMultiple('unidades', areglo);
+          });
+          }
+      });
+    });
+    this._service.getGenerico('util/catalogos/cantidad').subscribe(cantidad => {
+      this._serviceDexi.count('catalogoSat').then((resBD) => {
+        if (cantidad !== resBD) {
+          paginas = cantidad / cantidadRenglones;
+          this._serviceDexi.clearAll('catalogoSat');
+          for (let i = 1; i <= paginas + 1; i++) {
+            promesasCatalogo.push(this._service.getPromesasCatalogos(i, cantidadRenglones));
+          }
+          this._service.getTodosPromesas(promesasCatalogo).subscribe(areglo => {
+            console.log(areglo);
+            this._serviceDexi.addMultiple('catalogoSat', areglo);
+          });
+          }
+      });
     });
   }
 }

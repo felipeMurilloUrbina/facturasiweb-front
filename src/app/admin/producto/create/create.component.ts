@@ -3,12 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ProductoService } from '../producto.service';
 import { Producto } from '../../../modelos/producto.model';
+import { DexieService } from 'ngx-dexie';
 declare var $: any;
 @Component({
   selector: 'app-create-producto',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css'],
-  providers: [ProductoService]
+  providers: [ProductoService, DexieService]
 })
 export class CreateProductoComponent implements OnInit {
   id: number;
@@ -19,17 +20,24 @@ export class CreateProductoComponent implements OnInit {
   filtroResultados: string[] = [];
   producto: Producto;
   titulo = 'Nuevo Producto';
-  constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: ProductoService) {
+  constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: ProductoService, private _serviceDexie: DexieService) {
     this.producto = new Producto();
   }
 
   ngOnInit() {
-    $('.js-data-example-ajax').select2({
-      ajax: {
-        url: this._service.getUrl() + 'util/unidades',
-        dataType: 'json'
-        // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+    this._serviceDexie.toCollection('unidades').toArray().then((data) => {
+      $('#linea').select2({
+        data: data,
+        templateResult: function(dataTemplate) {
+          var $result = $(
+            '<div class="row">' +
+            '<div class="col-md-3">' + dataTemplate.Codigo + '</div>' +
+            '<div class="col-md-9">' + dataTemplate.Descripcion + '</div>' +
+            '</div>'
+          );
+          return $result;
       }
+      });
     });
     this._service.activarEsperando();
     this._route.params
