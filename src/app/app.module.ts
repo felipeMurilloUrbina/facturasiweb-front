@@ -11,7 +11,7 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GrowlModule, PanelMenuModule, SharedModule, PanelModule, DialogModule, DataTableModule, ButtonModule } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
-import {DexieModule} from 'ngx-dexie';
+import { DexieModule} from 'ngx-dexie';
 import { configDexie } from './dexie-config';
 import { AppService } from './base/app.service';
 @NgModule({
@@ -30,7 +30,6 @@ import { AppService } from './base/app.service';
     DialogModule,
     DataTableModule,
     PanelModule,
-    SharedModule,
     ToasterModule,
     TableModule,
     ReactiveFormsModule,

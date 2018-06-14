@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+import { Http } from '@angular/http';
 import 'rxjs/add/observable/forkJoin';
-import { Observable } from 'rxjs/Observable';
 import { contentHeaders, BaseService } from '../base';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
+import { Observable } from 'rxjs';
 const BASEURL = environment.baseApiCatalogos;
 declare var $: any;
 @Injectable()
@@ -28,15 +25,14 @@ export class AppService extends BaseService {
   }
 
   getTodosPromesas(promesas) {
-    const items = [];
+    const elementos = [];
     return Observable.forkJoin(promesas)
-    .map(res => {
-      res.forEach(data => {
-        data.json().Elementos.forEach(element => {
-          items.push(element);
-        });
-      });
-      return items;
+    .map((res: Response) => {
+      if ( res.status === 200 ) {
+       return res.json();
+     } else {
+     return false;
+    }
     });
   }
 }

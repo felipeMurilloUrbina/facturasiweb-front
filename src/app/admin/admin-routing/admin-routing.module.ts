@@ -1,22 +1,8 @@
-import { DashboardComponent } from './../dashboard/dashboard.component';
-import { ClienteComponent, CreateClienteComponent } from '../cliente';
-import { ProductoComponent, CreateProductoComponent } from '../producto';
-import { SucursalComponent, CreateSucursalComponent } from '../sucursal';
-import { FacturaComponent, CreateFacturaComponent } from '../documentos';
-import { AdminComponent } from './../admin.component';
-import { EquipoComponent, CreateEquipoComponent } from '../equipo';
-import { CreateServicioComponent, ServicioComponent } from '../servicio';
+
 import { NgModule, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from '../../base';
 import { PerfilComponent } from '../perfil/perfil.component';
-import { ClienteServicioComponent, ClienteEquipoComponent,
-         CreateClienteEquipoComponent, CreateClienteServicioComponent } from '../../cliente';
-import { ReporteClienteComponent, ReporteEquipoComponent,
-         ReporteFacturaComponent, ReporteProductoComponent, ReporteServicioComponent } from '../reporte/index';
-import { TurnoComponent, NuevoTurnoComponent, CajaComponent, NuevaCajaComponent,
-         VentasDelDiaComponent, PuntoVentaComponent } from '../punto-venta/index';
 import { AdminAppComponent } from '../../estructura-pagina';
 @NgModule({
   imports: [

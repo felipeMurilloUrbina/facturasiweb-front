@@ -25,7 +25,8 @@
         "assets/css/theme.css",
         "../node_modules/primeng/resources/primeng.min.css",
         "assets/css/main.css", 	
-        "assets/css/util.css"
+        "assets/css/util.css",
+        "assets/select2/select2.min.js"
       ],
       "scripts": [
         "assets/jquery/jquery.min.js",
