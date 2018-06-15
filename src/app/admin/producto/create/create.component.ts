@@ -20,6 +20,7 @@ export class CreateProductoComponent implements OnInit {
   filtroResultados: string[] = [];
   producto: Producto;
   titulo = 'Nuevo Producto';
+  me = this;
   constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: ProductoService, private _serviceDexie: DexieService) {
     this.producto = new Producto();
   }
@@ -44,7 +45,6 @@ export class CreateProductoComponent implements OnInit {
     if ($.trim(params.term) === '') {
       return data;
     }
-    console.log(data);
     // Do not display the item if there is no 'text' property
     if (typeof data.text === 'undefined') {
       return null;
@@ -52,15 +52,6 @@ export class CreateProductoComponent implements OnInit {
 
     // `params.term` should be the term that is used for searching
     // `data.text` is the text that is displayed for the data object
-    if (data.text.indexOf(params.term) > -1) {
-      var modifiedData = $.extend({}, data, true);
-      modifiedData.text += ' (matched)';
-
-      // You can return modified objects from here
-      // This includes matching the `children` how you want in nested data sets
-      return modifiedData;
-    }
-
     // Return `null` if the term should not be displayed
     return null;
 }
@@ -94,8 +85,19 @@ export class CreateProductoComponent implements OnInit {
     this._service.cerrarEsperando();
   }
 
-  buscar(event) {
-    this.getCatalogoSat(event.query);
+  buscarCodigo(event) {
+    // this.getCatalogoSat(event.query);
+    // console.log(event.query);
+    this.filtroResultados = this.unidades.filter(u => u.Descripcion.toLowerCase() === <string>event.query.toLowerCase());
+    if (this.filtroResultados.length === 0)
+    {
+      this.filtroResultados = this.unidades.filter(p => p.Descripcion.toLowerCase().indexOf(event.query.toLowerCase()) > -1);
+    }
+    console.log(this.filtroResultados);
+    if (this.filtroResultados.length === 0) {
+      this.filtroResultados = this.unidades.filter(p => p.Codigo.toLowerCase().indexOf(event.query.toLowerCase()) > -1);
+      console.log(this.filtroResultados);
+    }
     // this.filtroResultados = this.buscarProducto(event.query);
   }
 
@@ -104,10 +106,12 @@ export class CreateProductoComponent implements OnInit {
   }
 
   getUnidadesSat(busqueda) {
-    this._service.getGenerico('util/unidades/' + busqueda).subscribe(data => {
-      this.filtroResultados = data;
-    }, Error => {
-    });
+  let unidadesFiltradas = this.unidades.filter(u => u.Descripcion.indexOf(busqueda));
+  console.log(unidadesFiltradas);
+    //   this._service.getGenerico('util/unidades/' + busqueda).subscribe(data => {
+  //     this.filtroResultados = data;
+  //   }, Error => {
+  //   });
   }
 
   guardar() {

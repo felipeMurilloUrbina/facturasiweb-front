@@ -21,11 +21,27 @@
   <section  class="content">
     <div class="container-fluid">
       <div class="row">
-        <label>Minimal</label>
+        <!-- <label>Minimal</label>
         <select class="form-control"  id="linea" [(ngModel)]="producto.CatalogoId">
           <option value="{{unidad.Id}}" *ngFor="let unidad of unidades">{{unidad.Descripcion}}</option>
           <option value="2"></option>
-        </select>
+        </select> -->
+        <div class="col-12">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="catalogo-id" style="padding-bottom: 4px;"> Codigo Sat(Teclee las primeras 3 letras):</label>
+                <p-autoComplete id="catalogo-id" [(ngModel)]="producto.CatalogoSat" emptyMessage="No hay Registros" [size]="60" [suggestions]="filtroResultados" (completeMethod)="buscarCodigo($event)" field="Descripcion" [inputStyle]="{'width':'100%'}" ></p-autoComplete>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="codigo">Codigo:</label>
+                <input type="text" class="form-control" id="codigo" [(ngModel)]="producto.Codigo" placeholder="Escriba el codigo producto">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

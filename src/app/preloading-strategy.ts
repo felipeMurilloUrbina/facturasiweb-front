@@ -32,7 +32,6 @@ export class CustomPreloadingStrategy implements PreloadingStrategy {
 
     this._service.getGenerico('util/unidades/cantidad').subscribe(cantidad => {
       this._serviceDexi.count('unidades').then((cantidadBD) => {
-        console.log(cantidadBD);
         if (cantidad !== cantidadBD) {
           paginas = cantidad / cantidadRenglones;
           this._serviceDexi.clearAll('unidades');
@@ -46,8 +45,8 @@ export class CustomPreloadingStrategy implements PreloadingStrategy {
       });
     });
     this._service.getGenerico('util/catalogos/cantidad').subscribe(cantidad => {
-      this._serviceDexi.count('catalogoSat').then((resBD) => {
-        if (cantidad !== resBD) {
+      this._serviceDexi.count('catalogoSat').then((cantidadBD) => {
+        if (cantidad !== cantidadBD) {
           paginas = cantidad / cantidadRenglones;
           this._serviceDexi.clearAll('catalogoSat');
           for (let i = 1; i <= paginas + 1; i++) {

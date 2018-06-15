@@ -21,7 +21,7 @@
   color: #453821;
   font-weight: bold; }
   .ui-widget-header a {
-    color: #453821; }
+    color: #007bff; }
 
 .ui-widget-overlay {
   background: #666666;
@@ -43,8 +43,8 @@
     color: #140f06; }
 
 .ui-state-highlight {
-  border-color: #654b24;
-  background: #654b24;
+  border-color: #007bff;
+  background: #007bff;
   color: #ffffff; }
   .ui-state-highlight a {
     color: #ffffff; }
@@ -128,11 +128,11 @@
   outline: 0 none;
   border-color: #b2a266;
   background: #f7f3de;
-  color: #3a3427; }
+  color: #007bff; }
   .ui-button:focus a,
   .ui-button:enabled:hover a,
   .ui-fileupload-choose:not(.ui-state-disabled):hover a {
-    color: #3a3427; }
+    color: #007bff; }
 
 .ui-button:enabled:active,
 .ui-fileupload-choose:not(.ui-state-disabled):active {
@@ -143,9 +143,9 @@
 .ui-chkbox-box:not(.ui-state-disabled):not(.ui-state-active):hover {
   border-color: #b2a266;
   background: #f7f3de;
-  color: #3a3427; }
+  color: #007bff; }
   .ui-chkbox-box:not(.ui-state-disabled):not(.ui-state-active):hover a {
-    color: #3a3427; }
+    color: #007bff; }
 
 .ui-radiobutton-box:not(.ui-state-disabled):not(.ui-state-active):hover {
   border-color: #b2a266;
