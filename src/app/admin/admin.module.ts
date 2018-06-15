@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { PanelModule,  AutoCompleteModule, ButtonModule, DataTableModule,
+import { AutoCompleteModule, ButtonModule, DataTableModule,
           InputTextModule, ChartModule, DropdownModule,
-          TabViewModule, BlockUIModule, DialogModule, MenuItem,
-          GrowlModule, SharedModule, MegaMenuModule, FileUploadModule, PanelMenuModule,
+          TabViewModule,  DialogModule, 
+          GrowlModule, SharedModule,  FileUploadModule, PanelMenuModule,
           EditorModule, ListboxModule, CalendarModule } from 'primeng/primeng';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import { MultiSelectModule } from 'primeng/multiselect';

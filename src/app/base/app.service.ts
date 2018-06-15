@@ -27,12 +27,13 @@ export class AppService extends BaseService {
   getTodosPromesas(promesas) {
     const elementos = [];
     return Observable.forkJoin(promesas)
-    .map((res: Response) => {
-      if ( res.status === 200 ) {
-       return res.json();
-     } else {
-     return false;
-    }
+    .map((res) => {
+      res.forEach((areglo: any) => {
+        areglo.json().Elementos.forEach(elemento => {
+          elementos.push(elemento);
+        });
+      });
+      return elementos;
     });
   }
 }

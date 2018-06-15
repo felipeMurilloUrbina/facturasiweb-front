@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.sucursales.length > 0) {
-      console.log(this.usuario.SucursalId);
       localStorage.setItem('sucursal', this.usuario.SucursalId.toString());
       this.router.navigate(['/admin']);
     }

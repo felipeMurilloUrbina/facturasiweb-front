@@ -22,7 +22,9 @@
     <div class="container-fluid">
       <div class="row">
         <label>Minimal</label>
-        <select class="form-control"  id="linea" [(ngModel)]="producto.CatalogoId"style="width: 100%;">
+        <select class="form-control"  id="linea" [(ngModel)]="producto.CatalogoId">
+          <option value="{{unidad.Id}}" *ngFor="let unidad of unidades">{{unidad.Descripcion}}</option>
+          <option value="2"></option>
         </select>
       </div>
     </div>

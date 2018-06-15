@@ -27,19 +27,22 @@ export class CustomPreloadingStrategy implements PreloadingStrategy {
     let paginas = 0;
     let promesasUnidades = [];
     let promesasCatalogo = [];
+    // this._serviceDexi.clearAll('catalogoSat');
+    // this._serviceDexi.clearAll('unidades');
+
     this._service.getGenerico('util/unidades/cantidad').subscribe(cantidad => {
-      this._serviceDexi.count('unidades').then((resBD) => {
-        if (cantidad !== resBD) {
+      this._serviceDexi.count('unidades').then((cantidadBD) => {
+        console.log(cantidadBD);
+        if (cantidad !== cantidadBD) {
           paginas = cantidad / cantidadRenglones;
           this._serviceDexi.clearAll('unidades');
           for (let i = 1; i <= paginas + 1; i++) {
             promesasUnidades.push(this._service.getPromesasUnidades(i, cantidadRenglones));
           }
           this._service.getTodosPromesas(promesasUnidades).subscribe(areglo => {
-            console.log(areglo);
             this._serviceDexi.addMultiple('unidades', areglo);
           });
-          }
+        }
       });
     });
     this._service.getGenerico('util/catalogos/cantidad').subscribe(cantidad => {
@@ -51,10 +54,9 @@ export class CustomPreloadingStrategy implements PreloadingStrategy {
             promesasCatalogo.push(this._service.getPromesasCatalogos(i, cantidadRenglones));
           }
           this._service.getTodosPromesas(promesasCatalogo).subscribe(areglo => {
-            console.log(areglo);
             this._serviceDexi.addMultiple('catalogoSat', areglo);
           });
-          }
+        }
       });
     });
   }
