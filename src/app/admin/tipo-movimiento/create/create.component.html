@@ -80,10 +80,12 @@
     <br/>
     <br/>
     <footer class="container-fluid text-center">
-      <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:center" routerLink="/admin/tipos-movimientos"  class="ui-button-danger" label="Cancelar tipo de movimiento">
-      </button>
-      <button type="button" pButton icon="fa-check" style="float:center" (click)="guardar()" label="Guardar tipo de movimiento">
-      </button>
+        <a class="btn btn-app" routerLink="/admin/tipos-movimientos">
+          <i class="fa fa-arrow-circle-left"></i> Cancelar
+        </a>
+        <a class="btn btn-app"  (click)="guardar()">
+          <i class="fa fa-save"></i> Guardar
+        </a>
     </footer>
   </section>
   <!-- /.content -->

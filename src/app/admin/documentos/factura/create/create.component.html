@@ -255,10 +255,12 @@
             <!-- this row will not appear when printing -->
             <div class="row no-print">
               <div class="col-12">
-                <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:right" (click)="guardar()" label="Guardar  Factura">
-                </button>
-                <button type="button" pButton icon="fa-credit-card" style="float:right" (click)="regresar()" class="ui-button-danger" label="Cancelar  Factura">
-                </button>
+                <a class="btn btn-app" routerLink="/admin/facturas">
+                  <i class="fa fa-arrow-circle-left"></i> Cancelar
+                </a>
+                <a class="btn btn-app"  (click)="guardar()">
+                  <i class="fa fa-save"></i> Guardar
+                </a>
               </div>
             </div>
           </section>

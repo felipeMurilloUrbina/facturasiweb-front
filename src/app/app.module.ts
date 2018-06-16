@@ -5,15 +5,16 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
-import { ToNumberPipe, AuthGuard } from './base';
+import { AuthGuard } from './base';
 import { LoginComponent } from './login';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GrowlModule, PanelMenuModule, SharedModule, PanelModule, DialogModule, DataTableModule, ButtonModule } from 'primeng/primeng';
+// import { GrowlModule, PanelMenuModule, PanelModule, DialogModule, DataTableModule, ButtonModule } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
 import { DexieModule} from 'ngx-dexie';
 import { configDexie } from './dexie-config';
 import { AppService } from './base/app.service';
+import { GrowlModule } from 'primeng/primeng';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,15 +22,15 @@ import { AppService } from './base/app.service';
   ],
   imports: [
     HttpModule,
-    ButtonModule,
+    // ButtonModule,
+    GrowlModule,
+    // PanelMenuModule,
+    // DialogModule,
+    // PanelModule,
+    // DataTableModule,
     BrowserModule,
     DexieModule.forRoot(configDexie),
     FormsModule,
-    GrowlModule,
-    PanelMenuModule,
-    DialogModule,
-    DataTableModule,
-    PanelModule,
     ToasterModule,
     TableModule,
     ReactiveFormsModule,

@@ -25,6 +25,7 @@ export class CreateClienteComponent implements OnInit {
   cargarFactura = false;
   cliente: Cliente;
   titulo = 'Nuevo Cliente';
+  sucursales: any[];
   constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: ClienteService) {
     this._route.params
       .subscribe(params => {
@@ -82,6 +83,7 @@ export class CreateClienteComponent implements OnInit {
 
   setForm(cliente) {
     if (cliente !== null ) {
+      cliente.Direcciones
       this.onChangeEstado(cliente.Estado);
       this.estadoSeleccionado = cliente.Estado;
       if ((cliente.Correo) && (cliente.Correo !== '')) {
@@ -99,16 +101,6 @@ export class CreateClienteComponent implements OnInit {
    this._service.getGenerico('util/' + event).subscribe(data => {
       this.municipios  = data;
     });
-  }
-
-  agregarCorreo() {
-    if (this.emailRegex.test(this.correo)) {
-      this.correos.push(this.correo);
-    } else {
-      this._service.enviarMensaje('warning', 'Correo', 'Favor de ingresar un correo valido');
-    }
-    this.correo = '';
-    $('#correo').val('');
   }
 
   onChangeMun(event) {
@@ -148,11 +140,7 @@ export class CreateClienteComponent implements OnInit {
   }
 
   regresar() {
-    this._router.navigate(['//clientes'], { queryParams: {} });
-  }
-
-  cerrar(Id) {
-    this.correos.splice(this.correos.findIndex(r => r === Id), 1);
+    this._router.navigate(['/clientes'], { queryParams: {} });
   }
 
 }

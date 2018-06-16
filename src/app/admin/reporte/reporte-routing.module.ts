@@ -1,8 +1,8 @@
-import { NgModule, ModuleWithProviders } from "@angular/core";
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from "../../base";
+import { AuthGuard } from '../../base';
 import { ReporteClienteComponent, ReporteEquipoComponent, ReporteFacturaComponent,
-         ReporteProductoComponent, ReporteServicioComponent } from ".";
+         ReporteProductoComponent, ReporteServicioComponent } from '.';
 const routes: Routes = [
   { path: '', component: ReporteClienteComponent },
   { path: 'clientes', component: ReporteClienteComponent, canActivate: [AuthGuard] },

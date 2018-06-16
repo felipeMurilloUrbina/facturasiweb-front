@@ -8,22 +8,27 @@
       <a href="index3.html" class="nav-link">Inicio</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">Acerca de...</a>
+      <a href="#" class="nav-link">Acercade...</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-      <a href="#" class="nav-link">Salir...</a>
+      <a href="#" class="nav-link" (click)="cerrarSession()">Salir...</a>
     </li>
   </ul>
-
+  
+  <!-- <div class="form-group">
+    <label style="color:white;">Sucursales:</label>
+    <select  class="form-control" [(ngModel)]="sucursalId" (change)="onCambioEmpresa($event.target.value)"  style="width: 100%;">
+      <option  value="" >[*Seleccione una sucursal]</option>
+      <option  value="{{suc.Id}}" *ngFor="let suc of sucursales">{{suc.Id}}--{{suc.Descripcion}}</option>
+    </select>
+  </div> -->
   <!-- SEARCH FORM -->
-  <form class="form-inline ml-3">
     <div class="input-group input-group-sm">
-      <input class="form-control form-control-navbar" type="search" placeholder="Busqueda" aria-label="Busqueda">
-      <div class="input-group-append">
-        <button class="btn btn-navbar" type="submit">
-          <i class="fa fa-search"></i>
-        </button>
+      <div class="col-6">
+        <select  class="form-control" [(ngModel)]="sucursalId" (change)="onCambioEmpresa($event.target.value)">
+          <option  value="" >[*Seleccione una sucursal]</option>
+          <option  value="{{suc.Id}}" *ngFor="let suc of sucursales">{{suc.Id}}--{{suc.Descripcion}}</option>
+        </select>
       </div>
     </div>
-  </form>
 </nav>

@@ -4,32 +4,31 @@ import { ClienteComponent, CreateClienteComponent } from '.';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule, SharedModule, AutoCompleteModule, DialogModule, DataTableModule, DropdownModule, TabMenuModule, AccordionModule } from 'primeng/primeng';
-import { TablaFacturaComponent } from '../documentos';
-import { BrowserModule } from '@angular/platform-browser';
+import { ButtonModule, SharedModule, AutoCompleteModule,
+         DialogModule, DataTableModule, DropdownModule, TabMenuModule, AccordionModule, TabViewModule } from 'primeng/primeng';
 import { ClienteTablaServicioComponent } from '../../cliente';
-import { FacturaModule } from '../documentos/factura/factura.module';
-
+import { CapturaDireccionComponent } from '../../share/captura-direccion';
 
 @NgModule({
   imports: [
     AutoCompleteModule,
     AccordionModule,
     TabMenuModule,
+    TabViewModule,
     ButtonModule,
     DialogModule,
     DropdownModule,
-    FormsModule,    
+    FormsModule,
     ReactiveFormsModule,
     TableModule,
     DataTableModule,
     SharedModule,
-    CommonModule, 
-    FacturaModule,
+    CommonModule,
     routingCliente
   ],
     declarations: [
     ClienteComponent,
+    CapturaDireccionComponent,
     ClienteTablaServicioComponent,
     CreateClienteComponent
   ]

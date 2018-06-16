@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class CapturaDireccionService  extends  BaseService {
-  estados :string[];
+  estados: string[];
   constructor(public http: Http, public router: Router, toasterService: ToasterService) {
     super(router, http, environment.baseApiConsultas, 'cliente', toasterService);
   }
@@ -51,7 +51,5 @@ export class CapturaDireccionService  extends  BaseService {
       'Tamaulipas',
     ];
     return this.estados;
-  } 
-
-
+  }
 }

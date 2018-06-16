@@ -6,14 +6,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
-import { BaseService } from '../../base';
-import { environment } from '../../../environments/environment';
+import { BaseService } from '../base';
+import { environment } from '../../environments/environment';
 
 @Injectable()
-export class HeaderService  extends  BaseService {
+export class EstructuraService  extends  BaseService {
 
   constructor(public http: Http, public router: Router, toasterService: ToasterService) {
-    super(router, http, environment.baseApiCatalogos, 'equipo', toasterService);
+    super(router, http,  environment.baseApiCatalogos, 'equipo', toasterService);
   }
 
 }
