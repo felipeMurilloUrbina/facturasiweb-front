@@ -56,7 +56,7 @@
         </div>
         <div style="text-align: right">        
             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-            <input type="text" class="form-control" placeholder="Busqueda..." (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            <input type="text" placeholder="Busqueda..." (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
         </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>

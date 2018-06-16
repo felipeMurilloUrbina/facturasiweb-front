@@ -14,13 +14,14 @@ declare var $: any;
 export class CreateProductoComponent implements OnInit {
   id: number;
   unidades: any[];
-  codigos: any[] = [];
-  results: any[] = [];
+  lineas: any[];
+  codigos: any[];
   display: Boolean = false;
   filtroResultados: string[] = [];
   producto: Producto;
+  esLocalizacion = false;
+  esCostos = false;
   titulo = 'Nuevo Producto';
-  me = this;
   constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: ProductoService, private _serviceDexie: DexieService) {
     this.producto = new Producto();
   }
@@ -28,9 +29,9 @@ export class CreateProductoComponent implements OnInit {
   ngOnInit() {
     this._serviceDexie.toCollection('unidades').toArray().then((unidades) => {
       this.unidades =  unidades;
-      $('#linea').select2({
-        matcher: this.matchCustom
-      });
+    });
+    this._serviceDexie.toCollection('catalogoSat').toArray().then((codigos) => {
+      this.codigos =  codigos;
     });
     this._service.activarEsperando();
     this._route.params
@@ -39,22 +40,6 @@ export class CreateProductoComponent implements OnInit {
       this.getProducto(this.id);
     });
   }
-
-  matchCustom(params, data) {
-    // If there are no search terms, return all of the data
-    if ($.trim(params.term) === '') {
-      return data;
-    }
-    // Do not display the item if there is no 'text' property
-    if (typeof data.text === 'undefined') {
-      return null;
-    }
-
-    // `params.term` should be the term that is used for searching
-    // `data.text` is the text that is displayed for the data object
-    // Return `null` if the term should not be displayed
-    return null;
-}
 
   getCatalogoSat(busqueda) {
       this._service.getGenerico('util/catalogos/' + busqueda).subscribe(data => {
@@ -86,32 +71,21 @@ export class CreateProductoComponent implements OnInit {
   }
 
   buscarCodigo(event) {
-    // this.getCatalogoSat(event.query);
-    // console.log(event.query);
+    this._service.getGenerico('util/catalogos/' + event.query).subscribe(data => {
+      this.filtroResultados = data;
+    }, Error => {
+    });
+  }
+
+  buscarUnidad(event) {
     this.filtroResultados = this.unidades.filter(u => u.Descripcion.toLowerCase() === <string>event.query.toLowerCase());
     if (this.filtroResultados.length === 0)
     {
       this.filtroResultados = this.unidades.filter(p => p.Descripcion.toLowerCase().indexOf(event.query.toLowerCase()) > -1);
     }
-    console.log(this.filtroResultados);
     if (this.filtroResultados.length === 0) {
       this.filtroResultados = this.unidades.filter(p => p.Codigo.toLowerCase().indexOf(event.query.toLowerCase()) > -1);
-      console.log(this.filtroResultados);
     }
-    // this.filtroResultados = this.buscarProducto(event.query);
-  }
-
-  buscarUnidad(event) {
-    this.getUnidadesSat(event.query);
-  }
-
-  getUnidadesSat(busqueda) {
-  let unidadesFiltradas = this.unidades.filter(u => u.Descripcion.indexOf(busqueda));
-  console.log(unidadesFiltradas);
-    //   this._service.getGenerico('util/unidades/' + busqueda).subscribe(data => {
-  //     this.filtroResultados = data;
-  //   }, Error => {
-  //   });
   }
 
   guardar() {

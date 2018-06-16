@@ -1,49 +1,181 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>{{titulo}}</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item">
-                <a href="#">Inicio</a>
-              </li>
-              <li class="breadcrumb-item active">{{titulo}}</li>
-            </ol>
-          </div>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{titulo}}</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a href="#">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">{{titulo}}</li>
+          </ol>
         </div>
       </div>
-      <!-- /.container-fluid -->
-    </section>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
   <section  class="content">
     <div class="container-fluid">
       <div class="row">
         <!-- <label>Minimal</label>
-        <select class="form-control"  id="linea" [(ngModel)]="producto.CatalogoId">
-          <option value="{{unidad.Id}}" *ngFor="let unidad of unidades">{{unidad.Descripcion}}</option>
-          <option value="2"></option>
-        </select> -->
-        <div class="col-12">
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group">
-                <label for="catalogo-id" style="padding-bottom: 4px;"> Codigo Sat(Teclee las primeras 3 letras):</label>
-                <p-autoComplete id="catalogo-id" [(ngModel)]="producto.CatalogoSat" emptyMessage="No hay Registros" [size]="60" [suggestions]="filtroResultados" (completeMethod)="buscarCodigo($event)" field="Descripcion" [inputStyle]="{'width':'100%'}" ></p-autoComplete>
+          <select class="form-control"  id="linea" [(ngModel)]="producto.CatalogoId">
+            <option value="{{unidad.Id}}" *ngFor="let unidad of unidades">{{unidad.Descripcion}}</option>
+            <option value="2"></option>
+          </select> -->
+          <div class="col-12">
+            <h3>Información General</h3>
+            <div class="row"> <!--Renglon para poner los codigos> -->
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="catalogo-id" style="padding-bottom: 4px;"> Codigo Sat(Teclee las primeras 3 letras):</label>
+                  <p-autoComplete id="catalogo-id" [(ngModel)]="producto.CatalogoSat" emptyMessage="No hay Registros" [size]="60" [suggestions]="filtroResultados" (completeMethod)="buscarCodigo($event)" field="Descripcion" [inputStyle]="{'width':'100%'}" ></p-autoComplete>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="codigo">Codigo:</label>
+                  <input type="text" class="form-control" id="codigo" [(ngModel)]="producto.Codigo" placeholder="Escriba el codigo producto">
+                </div>
+              </div>
+            </div> <!--Termina renglon codigos-->
+            <div class="row"> <!--Empieza renglon descripcion-->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="descripcion">Descripción:</label>
+                  <input type="text" class="form-control" id="descripcion" [(ngModel)]="producto.Descripcion" placeholder="Escriba la descripción">
+                </div>
+              </div>
+            </div><!--Termina renglon descripcion-->
+            <div class="row"> <!--Empieza renglon Linea-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="linea-id">Linea:</label>
+                  <select class="form-control" [(ngModel)]="producto.LineaId" id="linea-id">
+                    <option value ="" selected="selected">[*Seleccione la linea]</option>
+                    <option value="-1" *ngFor="let linea of linea">Exento</option>
+                    <option value="0">0%</option>
+                    <option value="0.16">16%</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="catalogo-id" style="padding-bottom: 4px;">Unidad:</label>
+                  <p-autoComplete id="unidad-id" [(ngModel)]="producto.Unidad" emptyMessage="No hay Registros" [size]="40" [suggestions]="filtroResultados" (completeMethod)="buscarUnidad($event)" field="Descripcion" [inputStyle]="{'width':'100%'}" ></p-autoComplete>
+                </div>
+              </div>
+            </div><!--Termina renglon Linea-->
+            <br/>
+            <h4>Información precios y costos </h4> <p-inputSwitch onLabel="Ver" offLabel="No ver" [(ngModel)]="esCostos" [style]="{'float':'right'}"></p-inputSwitch> 
+            <div *ngIf="esCostos" class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="precio">Precio:</label>
+                  <input type="number" class="form-control" step="any" id="precio" [(ngModel)]="producto.Precio" placeholder="Escriba el precio">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="descuento">Descuento:</label>
+                  <input type="number" class="form-control" id="descuento" [(ngModel)]="producto.Descuento" min=0 max=100 placeholder="Escriba el precio">
+                </div>
+              </div>
+              
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="tasa-iva">Iva:</label>
+                  <select class="form-control" [(ngModel)]="producto.TasaIva" id="tasa-iva" required>
+                    <option value ="" selected="selected">*Seleccione una tasa Iva</option>
+                    <option value="-1">Exento</option>
+                    <option value="0">0%</option>
+                    <option value="0.16">16%</option>
+                  </select>
+                </div>
+              </div>
+              <div  class="col-md-4">
+                <div class="form-group">
+                  <label for="tasa-ieps">Ieps:</label>
+                  <select  id="tasa-ieps" class="form-control select2" [(ngModel)]="producto.TasaIeps"  style="width: 100%;" required>
+                    <option  value ="0" selected="selected">*Seleccione la Ieps</option>
+                    <option  value="0.03">3%</option>
+                    <option  value="0.045">4.5%</option>
+                    <option  value="0.08">8%</option>
+                    <option  value="0.53">53%</option>
+                  </select>
+                </div>
               </div>
             </div>
-            <div class="col-6">
-              <div class="form-group">
-                <label for="codigo">Codigo:</label>
-                <input type="text" class="form-control" id="codigo" [(ngModel)]="producto.Codigo" placeholder="Escriba el codigo producto">
+            <div *ngIf="esCostos" class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="tasa-retiva">Retencion de Iva:</label>
+                  <select id="tasa-retiva" class="form-control select2" [(ngModel)]="producto.TasaRetIva"  style="width: 100%;" required>
+                    <option  value ="0" selected="selected">*Seleccione la Retencion</option>
+                    <option  value="0.04">4%</option>
+                    <option  value="0.106666">10.6667%</option>
+                    <option  value="0.16">16%</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="tasa-retisr">Retencion de Isr:</label>
+                  <select id="tasa-retisr" class="form-control select2" [(ngModel)]="producto.TasaRetIsr"  style="width: 100%;" required>
+                    <option  value ="0" selected="selected">*Seleccione la Retencion</option>
+                    <option  value="0.1">10%</option>
+                  </select>
+                </div>
+              </div>
+            </div><br/>
+            <h4>Información de localización </h4><p-inputSwitch  onLabel="Ver" offLabel="No ver" [(ngModel)]="esLocalizacion" [style]="{'float':'right'}"></p-inputSwitch>
+            <div *ngIf="esLocalizacion" class="row"><!--Empieza renglon Informacion localizacion-->
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="lote">Lote:</label>
+                  <input type="text" class="form-control" id="lote" [(ngModel)]="producto.Lote" placeholder="Escriba el lote ">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="fecha-caducidad">Fecha Caducidad:</label>
+                  <input type="text" class="form-control" id="fecha-caducidad" [(ngModel)]="producto.FechaCaducidad" placeholder="Escriba la fecha caducidad">
+                </div>
               </div>
             </div>
+            <div *ngIf="esLocalizacion" class="row"><!--Empieza renglon Informacion localizacion-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="ubicacion">Ubicación:</label>
+                  <textarea class="form-control" [(ngModel)]="producto.Ubicacion" rows="2" id="ubicacion"></textarea>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="observacion">Observaciones:</label>
+                  <textarea class="form-control" [(ngModel)]="producto.Observacion" rows="2" id="observacion"></textarea>
+                </div>
+              </div>
+            </div><!--Termina renglon Informacion localizacion-->
           </div>
+          <footer class="container-fluid text-center">
+            <a class="btn btn-app" routerLink="/admin/productos" (click)="guardar()">
+              <i class="fa fa-arrow-circle-left"></i> Cancelar
+            </a>
+            <a class="btn btn-app"  (click)="guardar()" >
+                <i class="fa fa-save"></i> Guardar
+              </a>
+            <!-- <button type="button" pButton icon="fa-arrow-circle-o-left" style="float:center" routerLink="/admin/productos"  class="ui-button-danger" label="Cancelar Producto">
+            </button>
+            <button type="button" pButton icon="fa-check" style="float:center" (click)="guardar()" label="Guardar  Producto">
+            </button> -->
+          </footer>
         </div>
       </div>
-    </div>
-
+      
     </section>
   </div>
+  
