@@ -12,6 +12,7 @@ import {AccordionModule} from 'primeng/accordion';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AdminRoutingModule } from './admin-routing/admin-routing.module';
 import { AdminAppComponent, PiePaginaComponent, ContenidoComponent, EncabezadoComponent, MenuComponent } from '../estructura-pagina';
+import { ToasterModule } from 'angular2-toaster';
 @NgModule({
   imports: [
     AccordionModule,
@@ -32,6 +33,7 @@ import { AdminAppComponent, PiePaginaComponent, ContenidoComponent, EncabezadoCo
     SharedModule,
     TabViewModule,
     TableModule,
+    ToasterModule,
     PanelMenuModule,
     ReactiveFormsModule
   ],

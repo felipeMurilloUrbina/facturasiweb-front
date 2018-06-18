@@ -22,22 +22,17 @@ import { GrowlModule } from 'primeng/primeng';
   ],
   imports: [
     HttpModule,
-    // ButtonModule,
     GrowlModule,
-    // PanelMenuModule,
-    // DialogModule,
-    // PanelModule,
-    // DataTableModule,
     BrowserModule,
     DexieModule.forRoot(configDexie),
     FormsModule,
-    ToasterModule,
+    ToasterModule.forRoot(),
     TableModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [AppService, AuthGuard, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [ToasterService, AppService, AuthGuard, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

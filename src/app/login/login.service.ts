@@ -8,6 +8,7 @@ import { contentHeaders, BaseService } from '../base';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
+import { MessageService } from 'primeng/components/common/messageservice';
 const BASEURL = environment.baseApiCatalogos + 'api/usuarios';
 declare var $: any;
 @Injectable()

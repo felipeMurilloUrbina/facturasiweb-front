@@ -5,9 +5,10 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule, SharedModule, AutoCompleteModule,
-         DialogModule, DataTableModule, DropdownModule, TabMenuModule, AccordionModule, TabViewModule } from 'primeng/primeng';
+         DialogModule, DataTableModule, DropdownModule, TabMenuModule, AccordionModule, TabViewModule, GrowlModule } from 'primeng/primeng';
 import { ClienteTablaServicioComponent } from '../../cliente';
 import { CapturaDireccionComponent } from '../../share/captura-direccion';
+import { ToasterService, ToasterModule } from 'angular2-toaster';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { CapturaDireccionComponent } from '../../share/captura-direccion';
     FormsModule,
     ReactiveFormsModule,
     TableModule,
+    GrowlModule,
     DataTableModule,
     SharedModule,
     CommonModule,
@@ -31,6 +33,7 @@ import { CapturaDireccionComponent } from '../../share/captura-direccion';
     CapturaDireccionComponent,
     ClienteTablaServicioComponent,
     CreateClienteComponent
-  ]
+  ],
+   providers:[]
 })
 export class ClienteModule {}

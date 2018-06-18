@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Proveedor } from '../../../modelos/proveedor.model';
 import { ClienteService } from '../cliente.service';
+import { Cliente } from '../../../modelos/cliente.model';
 
 declare var $: any;
 @Component({
@@ -23,15 +23,15 @@ export class CreateClienteComponent implements OnInit {
   correos: string[] = [];
   correo: string;
   cargarFactura = false;
-  proveedor: Proveedor;
+  cliente: Cliente;
   titulo = 'Nuevo Cliente';
-
+  sucursales: any[];
   constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: ClienteService) {
     this._route.params
       .subscribe(params => {
         this.id = params['id'];
         if (this.id !== undefined) {
-          this.getproveedor(this.id);
+          this.getcliente(this.id);
         } else {
           this.setForm(null);
         }
@@ -40,7 +40,7 @@ export class CreateClienteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.proveedor = new Proveedor();
+    this.cliente = new Cliente();
   }
 
   getcatalogos() {
@@ -72,21 +72,22 @@ export class CreateClienteComponent implements OnInit {
     return filtered;
   }
 
-  getproveedor(id) {
+  getcliente(id) {
     this._service.getId(id).subscribe(data => {
-      this.proveedor = data;
-      this.setForm(this.proveedor);
+      this.cliente = data;
+      this.setForm(this.cliente);
     }, Error => {
       console.log(Error);
     });
   }
 
-  setForm(proveedor) {
-    if (proveedor !== null ) {
-      this.onChangeEstado(proveedor.Estado);
-      this.estadoSeleccionado = proveedor.Estado;
-      if ((proveedor.Correo) && (proveedor.Correo !== '')) {
-        this.correos = JSON.parse(proveedor.Correo);
+  setForm(cliente) {
+    if (cliente !== null ) {
+      cliente.Direcciones
+      this.onChangeEstado(cliente.Estado);
+      this.estadoSeleccionado = cliente.Estado;
+      if ((cliente.Correo) && (cliente.Correo !== '')) {
+        this.correos = JSON.parse(cliente.Correo);
       }
     }
   }
@@ -102,16 +103,6 @@ export class CreateClienteComponent implements OnInit {
     });
   }
 
-  agregarCorreo() {
-    if (this.emailRegex.test(this.correo)) {
-      this.correos.push(this.correo);
-    } else {
-      this._service.enviarMensaje('warning', 'Correo', 'Favor de ingresar un correo valido');
-    }
-    this.correo = '';
-    $('#correo').val('');
-  }
-
   onChangeMun(event) {
     this.buscarLocalidades(this.estadoSeleccionado, event);
   }
@@ -125,9 +116,9 @@ export class CreateClienteComponent implements OnInit {
   }
 
   guardar() {
-    this.proveedor.Id = this.id;
-    this.proveedor.Correo = JSON.stringify(this.correos);
-    this._service.guardar(this.proveedor, '').subscribe(data => {
+    this.cliente.Id = this.id;
+    this.cliente.Correo = JSON.stringify(this.correos);
+    this._service.guardar(this.cliente, '').subscribe(data => {
       this.procesoLimpiar(1);
     }, error => {
       this.procesoLimpiar(2);
@@ -149,11 +140,7 @@ export class CreateClienteComponent implements OnInit {
   }
 
   regresar() {
-    this._router.navigate(['/admin/clientes'], { queryParams: {} });
-  }
-
-  cerrar(Id) {
-    this.correos.splice(this.correos.findIndex(r => r === Id), 1);
+    this._router.navigate(['/clientes'], { queryParams: {} });
   }
 
 }

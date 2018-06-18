@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class EstructuraService  extends  BaseService {
 
-  constructor(public http: Http, public router: Router, toasterService: ToasterService) {
+  constructor( public http: Http, public router: Router, toasterService: ToasterService) {
     super(router, http,  environment.baseApiCatalogos, 'equipo', toasterService);
   }
 

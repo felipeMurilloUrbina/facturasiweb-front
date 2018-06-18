@@ -7,6 +7,6 @@ export class Direccion {
   public Colonia = '';
   public Municipio = '';
   public Estado = '';
-  public Pais = '';
+  public Pais = 'MEX';
   public Correo = '';
 }

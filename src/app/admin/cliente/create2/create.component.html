@@ -1,0 +1,70 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>{{titulo}}</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                <a href="#">Inicio</a>
+              </li>
+              <li class="breadcrumb-item active">{{titulo}}</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Small boxes (Stat box) -->
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="descripcion">Razón Social:</label>
+                <input type="text" class="form-control" id="descripcion" [(ngModel)]="cliente.Descripcion" placeholder="Escriba el Razon Social">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="rfc">RFC:</label>
+                <input type="text" class="form-control" id="rfc" [(ngModel)]="cliente.Rfc" placeholder="Escriba la RFC">
+              </div>
+            </div>
+          </div>
+          Direciones del cliente
+          <div class="row">
+            <div class="col-12">
+              <p-tabView>
+                <p-tabPanel [header]="index" *ngFor="let sucursal of cliente.Direcciones; let i = index" [selected]="i == 0">
+                  <app-captura-direccion [direccion]="sucursal.Direccion"></app-captura-direccion>
+                </p-tabPanel>
+                <p-tabPanel header="Nueva">
+                    <app-captura-direccion></app-captura-direccion>
+                </p-tabPanel>
+              </p-tabView>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <footer class="container-fluid text-center" style="margin:10px;">
+          <a class="btn btn-app" routerLink="/admin/clientes">
+            <i class="fa fa-arrow-circle-left"></i> Cancelar
+          </a>
+          <a class="btn btn-app" (click)="guardar()">
+            <i class="fa fa-save"></i> Guardar
+          </a>
+        </footer>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>

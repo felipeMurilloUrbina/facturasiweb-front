@@ -8,11 +8,12 @@ import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { BaseService } from '../../base';
 import { environment } from '../../../environments/environment';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Injectable()
 export class ClienteEquipoService  extends  BaseService {
 
-  constructor(public http: Http, public router: Router, toasterService: ToasterService) {
+  constructor( public http: Http, public router: Router, toasterService: ToasterService) {
     super(router, http, environment.baseApiReportes, 'equipos', toasterService);
   }
 

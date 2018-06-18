@@ -9,13 +9,15 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { contentHeaders } from './headers';
 import { environment } from '../../environments/environment';
+import {Message} from 'primeng/components/common/api';
+import {MessageService} from 'primeng/components/common/messageservice';
 declare var $: any;
 
 @Injectable()
 export class BaseService {
   private toasterService: ToasterService;
-  
   public baseUrl = '';
+  private messageService: MessageService;
   public options: RequestOptions = new RequestOptions({
       url: this.baseUrl,
       method: RequestMethod.Get,
@@ -30,6 +32,7 @@ export class BaseService {
     this.options.headers = contentHeaders;
     this.options.url = this.baseUrl + modulo;
     this.toasterService = toasterService;
+    this.messageService  = new MessageService();
   }
 
   getId(id: number): Observable<any> {
@@ -128,7 +131,6 @@ export class BaseService {
 
   intercept(observable: Observable<any>) {
     return observable.catch(err => {
-      console.log(err);
       this.cerrarEsperando();
       if (err.status === 0 ) {
         // this.enviarMensaje('error',  'Error', 'Error, con el servicio de datos');
