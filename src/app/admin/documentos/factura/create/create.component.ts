@@ -37,6 +37,7 @@ export class CreateFacturaComponent implements OnInit {
   producto: FactDetalle;
   complementos: any[] = [{'label': 'Instituciones Educativas',
   'value': 'iedu'}];
+  titulo = 'Nueva Factura';
   constructor(private _router: Router, private _route: ActivatedRoute, private _fb: FormBuilder, private _service: FacturaService) {
     this.factura = new Factura();
     this._route.params

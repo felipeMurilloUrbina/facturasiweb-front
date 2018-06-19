@@ -21,7 +21,7 @@ export class EncabezadoComponent implements OnInit {
   }
 
   onCambioEmpresa(event) {
-    localStorage.setItem('sucursalId',  event);
+    localStorage.setItem('sucursal',  event);
     this._router.navigate(['/admin/dashboard']);
   }
 
