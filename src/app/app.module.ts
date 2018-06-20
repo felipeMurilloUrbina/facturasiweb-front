@@ -1,7 +1,7 @@
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
@@ -14,16 +14,23 @@ import { TableModule } from 'primeng/table';
 import { DexieModule} from 'ngx-dexie';
 import { configDexie } from './dexie-config';
 import { AppService } from './base/app.service';
-import { GrowlModule } from 'primeng/primeng';
+import { GrowlModule, DataTableModule, SharedModule, FileUpload, DialogModule, FileUploadModule } from 'primeng/primeng';
+import { ConsultaArchivoComponent } from './share';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ConsultaArchivoComponent
   ],
   imports: [
     HttpModule,
     GrowlModule,
     BrowserModule,
+    DataTableModule,
+    FileUploadModule,
+    DialogModule,
+    CommonModule, 
+    SharedModule,
     DexieModule.forRoot(configDexie),
     FormsModule,
     ToasterModule.forRoot(),

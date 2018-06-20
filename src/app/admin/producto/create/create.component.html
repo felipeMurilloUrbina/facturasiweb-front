@@ -56,9 +56,7 @@
                   <label for="linea-id">Linea:</label>
                   <select class="form-control" [(ngModel)]="producto.LineaId" id="linea-id">
                     <option value ="" selected="selected">[*Seleccione la linea]</option>
-                    <option value="-1" *ngFor="let linea of linea">Exento</option>
-                    <option value="0">0%</option>
-                    <option value="0.16">16%</option>
+                    <option value="-1" *ngFor="let linea of lineas">{{linea.Descripcion}}</option>
                   </select>
                 </div>
               </div>

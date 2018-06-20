@@ -11,7 +11,7 @@ declare var $: any;
   styleUrls: ['./create.component.css'],
   providers: [ClienteService]
 })
-export class CreateClienteComponent implements OnInit {
+export class CreateClienteComponent2 implements OnInit {
   emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   municipios: any[];
   localidades: any[];

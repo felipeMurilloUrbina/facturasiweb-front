@@ -4,21 +4,20 @@ import { EquipoComponent, CreateEquipoComponent } from '.';
 import { DataTableModule, SharedModule } from 'primeng/primeng';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { TablaServicioComponent } from '../servicio';
-
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   imports: [
-    DataTableModule,
     FormsModule,    
-    SharedModule,
     ReactiveFormsModule,
+    DataTableModule,
+    SharedModule,
     CommonModule,
+    TableModule,
     routingEquipo],
   declarations: [
     EquipoComponent,
-    CreateEquipoComponent,
-    TablaServicioComponent
+    CreateEquipoComponent
   ]
 })
 export class EquipoModule {}

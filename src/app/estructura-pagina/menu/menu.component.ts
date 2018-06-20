@@ -10,7 +10,7 @@ import { EstructuraService } from '../estructura.service';
 })
 export class MenuComponent implements OnInit {
   user: any;
-  constructor(private _service: EstructuraService, private _jwtHelper: JwtHelper) { }
+  constructor(public _service: EstructuraService, private _jwtHelper: JwtHelper) { }
 
   ngOnInit() {
     this.user = JSON.parse(this._jwtHelper.decodeToken(localStorage.getItem('token')).user);

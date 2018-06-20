@@ -10,4 +10,5 @@ export class Cliente {
   public Estado: string;
   public Pais = 'MEX';
   public Correo: any;
+  public Direcciones = [];
 }

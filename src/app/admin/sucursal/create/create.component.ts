@@ -168,24 +168,26 @@ export class CreateSucursalComponent implements OnInit {
     });
     this.sucursal.Regimenes = regimenesG;
     this._service.guardar(this.sucursal, '').subscribe(data => {
-      this.procesoLimpiar(1);
+      this.procesoLimpiar(1, data);      
     }, error => {
-      this.procesoLimpiar(2);
+      this.procesoLimpiar(2, JSON.parse(error._body).Message);      
     });
   }
 
-  procesoLimpiar(opcion) {
+  procesoLimpiar(opcion, mensaje) {
     switch (opcion) {
       case 1:
-        this._service.enviarMensaje('success', 'Sucursal', 'Sucursal guardado correctamente');
+        this._service.enviarMensaje('success', 'Productos', mensaje);
       break;
       case 2:
-        this._service.enviarMensaje('error', 'Sucursal', 'Error al sucursal');
+        this._service.enviarMensaje('error', 'Productos', mensaje);
       break;
     }
-    this.sucursal = new Sucursal();
+  }
+
+  regresar() {
     setTimeout(() => {
-      this.regresar();
+      this._router.navigate(['/admin/sucursales'], { queryParams: {} });
     }, 600);
   }
 
@@ -201,8 +203,5 @@ export class CreateSucursalComponent implements OnInit {
 
   }
 
-  regresar() {
-    this._router.navigate(['/admin/sucursales'], { queryParams: {} });
-  }
 
 }

@@ -128,19 +128,19 @@ export class CreateClienteComponent implements OnInit {
     this.proveedor.Id = this.id;
     this.proveedor.Correo = JSON.stringify(this.correos);
     this._service.guardar(this.proveedor, '').subscribe(data => {
-      this.procesoLimpiar(1);
+      this.procesoLimpiar(1, data);      
     }, error => {
-      this.procesoLimpiar(2);
+      this.procesoLimpiar(2, JSON.parse(error._body).Message );
     });
   }
 
-  procesoLimpiar(opcion) {
+  procesoLimpiar(opcion, mensaje) {
     switch (opcion) {
       case 1:
-        this._service.enviarMensaje('success', 'Cliente', 'Cliente guardado correctamente');
+        this._service.enviarMensaje('success', 'Cliente', mensaje);
       break;
       case 2:
-        this._service.enviarMensaje('error', 'Cliente', 'Error al Cliente');
+        this._service.enviarMensaje('error', 'Cliente', mensaje);
       break;
     }
     setTimeout(() => {

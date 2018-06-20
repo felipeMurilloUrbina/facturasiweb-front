@@ -91,6 +91,7 @@ export class CreateProductoComponent implements OnInit {
   guardar() {
     this.producto.CatalogoId = this.producto.CatalogoSat ? this.producto.CatalogoSat.Id : 0;
     this.producto.UnidadId = this.producto.CatSatUnidad ? this.producto.CatSatUnidad.Id : 0;
+    console.log(this.producto.UnidadId);
     this.producto.CatSatUnidad = undefined;
     this.producto.CatalogoSat = undefined;
     this._service.guardar(this.producto, '').subscribe(data => {
@@ -117,6 +118,5 @@ export class CreateProductoComponent implements OnInit {
     setTimeout(() => {
       this._router.navigate(['/admin/productos'], { queryParams: {} });
     }, 600);
-
   }
 }

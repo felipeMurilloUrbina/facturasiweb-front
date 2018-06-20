@@ -44,7 +44,7 @@
             <div class="col-md-8">
               <div class="form-group">
                 <label for="descripcion">Sub-Linea:</label>
-                <select  id="sublineaId"  class="form-control select2" [(ngModel)]="linea.sublineaId" style="width: 100%;" required>
+                <select  id="sublineaId"  class="form-control select2" [(ngModel)]="linea.SubLineaId" style="width: 100%;" required>
                   <option value ="" selected="selected">*Seleccione la sub-linea</option>
                   <option value="{{linea.Id}} " *ngFor="let linea of lineas">{{linea.Descripcion}}</option>
                 </select>

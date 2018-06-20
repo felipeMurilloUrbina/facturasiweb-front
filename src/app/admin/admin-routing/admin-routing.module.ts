@@ -16,15 +16,14 @@ import { AdminAppComponent } from '../../estructura-pagina';
           { path: 'almacenes', loadChildren: '../almacen/almacen.module#AlmacenModule' },
           { path: 'clientes', loadChildren: '../cliente/cliente.module#ClienteModule' },
           { path: 'facturas', loadChildren: '../documentos/factura/factura.module#FacturaModule' },
-          { path: 'cotizaciones', loadChildren: '../documentos/cotizacion/cotizacion.module#CotizacionModule' },
           { path: 'equipos', loadChildren: '../equipo/equipo.module#EquipoModule' },
           { path: 'productos', loadChildren: '../producto/producto.module#ProductoModule' },
           { path: 'lineas', loadChildren: '../linea/linea.module#LineaModule' },
           { path: 'sucursales', loadChildren: '../sucursal/sucursal.module#SucursalModule' },
           { path: 'proveedores', loadChildren: '../proveedor/proveedor.module#ProveedorModule' },
           { path: 'tipos-movimientos', loadChildren: '../tipo-movimiento/tipo-movimiento.module#TipoMovimientoModule' },
-          { path: 'usuarios', loadChildren: '../usuario/usuario.module#UsuarioModule' },
-          { path: 'servicios', loadChildren: '../servicio/servicio.module#ServicioModule' }
+          { path: 'usuarios', loadChildren: '../usuario/usuario.module#UsuarioModule' }
+          // { path: 'servicios', loadChildren: '../servicio/servicio.module#ServicioModule' }
         ]
       },
     ])

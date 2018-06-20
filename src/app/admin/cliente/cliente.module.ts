@@ -6,9 +6,9 @@ import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule, SharedModule, AutoCompleteModule,
          DialogModule, DataTableModule, DropdownModule, TabMenuModule, AccordionModule, TabViewModule, GrowlModule } from 'primeng/primeng';
-import { ClienteTablaServicioComponent } from '../../cliente';
 import { CapturaDireccionComponent } from '../../share/captura-direccion';
 import { ToasterService, ToasterModule } from 'angular2-toaster';
+import { CreateClienteComponent2 } from './create2';
 
 @NgModule({
   imports: [
@@ -31,8 +31,8 @@ import { ToasterService, ToasterModule } from 'angular2-toaster';
     declarations: [
     ClienteComponent,
     CapturaDireccionComponent,
-    ClienteTablaServicioComponent,
-    CreateClienteComponent
+    CreateClienteComponent,
+    CreateClienteComponent2
   ],
    providers:[]
 })

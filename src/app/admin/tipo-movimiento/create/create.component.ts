@@ -81,15 +81,12 @@ export class CreateTipoMovimientoComponent implements OnInit {
   procesoLimpiar(opcion, mensaje) {
     switch (opcion) {
       case 1:
-        this._service.enviarMensaje('success', 'Tipo de Movimiento', 'Tipo de Movimiento guardado correctamente');
+        this._service.enviarMensaje('success', 'Tipo de Movimiento', mensaje);
       break;
       case 2:
         this._service.enviarMensaje('error', 'Tipo de Movimiento', mensaje);
       break;
     }
-    setTimeout(() => {
-      this.regresar();
-    }, 600);
   }
 
   regresar() {

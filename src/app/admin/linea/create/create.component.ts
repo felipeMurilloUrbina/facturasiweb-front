@@ -23,7 +23,6 @@ export class CreateLineaComponent implements OnInit {
   linea: Linea;
   lineas = [];
   titulo = 'Nueva Linea';
-  
   constructor(private _router: Router, private _route: ActivatedRoute, private fb: FormBuilder, private _service: LineaService) {
     this._route.params
       .subscribe(params => {
@@ -79,7 +78,7 @@ export class CreateLineaComponent implements OnInit {
   procesoLimpiar(opcion, mensaje) {
     switch (opcion) {
       case 1:
-        this._service.enviarMensaje('success', 'Linea', 'Linea guardado correctamente');
+        this._service.enviarMensaje('success', 'Linea', mensaje);
       break;
       case 2:
         this._service.enviarMensaje('error', 'Linea', mensaje);

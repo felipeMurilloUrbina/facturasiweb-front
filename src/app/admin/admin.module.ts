@@ -13,6 +13,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { AdminRoutingModule } from './admin-routing/admin-routing.module';
 import { AdminAppComponent, PiePaginaComponent, ContenidoComponent, EncabezadoComponent, MenuComponent } from '../estructura-pagina';
 import { ToasterModule } from 'angular2-toaster';
+import { SeleccionarTurnoComponent, CobrarNotaComponent, ConsultaTipoVentaComponent } from '../share';
 @NgModule({
   imports: [
     AccordionModule,
@@ -39,11 +40,14 @@ import { ToasterModule } from 'angular2-toaster';
   ],
   declarations: [
     AdminAppComponent,
+    SeleccionarTurnoComponent,
     MenuComponent,
     EncabezadoComponent,
     ContenidoComponent,
     PiePaginaComponent,
     PerfilComponent,
+    CobrarNotaComponent,
+    ConsultaTipoVentaComponent
   ],
   exports: [AdminAppComponent]
 })

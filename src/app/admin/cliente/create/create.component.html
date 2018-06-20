@@ -125,7 +125,7 @@
             </div>
             <div *ngIf="proveedor.Pais ==='MEX'" class="col-md-3">
               <div class="form-group">
-                <label for="ciudad">Ciudad:</label><br/>
+                <label for="ciudad">Ciudad:</label>
                 <p-autoComplete [(ngModel)]="proveedor.Ciudad" id="ciudad" [minLength]="3" [size]="35" [suggestions]="localidadesString" (completeMethod)="buscar($event)" (onSelect) ="select($event)"></p-autoComplete >
                 <!-- <input type="text" class="form-control" id="descripcion" formControlName="Ciudad" placeholder="Escriba la ciudad"> -->
               </div>
@@ -157,12 +157,6 @@
         </div>
       </div>
     </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
     <footer class="container-fluid text-center">
       <a class="btn btn-app" routerLink="/admin/proveedores">
         <i class="fa fa-arrow-circle-left"></i> Cancelar

@@ -128,24 +128,21 @@ export class CreateProveedorComponent implements OnInit {
     this.proveedor.Id = this.id;
     this.proveedor.Correo = JSON.stringify(this.correos);
     this._service.guardar(this.proveedor, '').subscribe(data => {
-      this.procesoLimpiar(1);
+      this.procesoLimpiar(1, data);
     }, error => {
-      this.procesoLimpiar(2);
+      this.procesoLimpiar(2, JSON.parse(error._body).Message);      
     });
   }
 
-  procesoLimpiar(opcion) {
+  procesoLimpiar(opcion, mensaje) {
     switch (opcion) {
       case 1:
-        this._service.enviarMensaje('success', 'proveedor', 'proveedor guardado correctamente');
+        this._service.enviarMensaje('success', 'Proveedor', mensaje);
       break;
       case 2:
-        this._service.enviarMensaje('error', 'proveedor', 'Error al proveedor');
+        this._service.enviarMensaje('error', 'Proveedor', mensaje);
       break;
     }
-    setTimeout(() => {
-      this.regresar();
-    }, 600);
   }
 
   regresar() {
