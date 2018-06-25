@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { routingAlmacen } from './almacen-routing.module';
-import { AlmacenComponent, CreateAlmacenComponent } from '.';
 import { TableModule } from 'primeng/table';
 import { SharedModule, ButtonModule } from 'primeng/primeng';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlmacenComponent } from './almacen.component';
+import { CreateAlmacenComponent } from './create';
 
 
 @NgModule({

@@ -49,6 +49,7 @@
     "jqueryui": "^1.11.1",
     "moment": "^2.18.1",
     "morris.js": "^0.5.0",
+    "ng-loading-spinner": "^1.0.3",
     "ngx-dexie": "^1.1.0",
     "npm": "^5.10.0",
     "primeng": "^5.2.7",

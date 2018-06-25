@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { routingCliente } from './cliente-routing.module';
-import { ClienteComponent, CreateClienteComponent } from '.';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,6 +8,8 @@ import { ButtonModule, SharedModule, AutoCompleteModule,
 import { CapturaDireccionComponent } from '../../share/captura-direccion';
 import { ToasterService, ToasterModule } from 'angular2-toaster';
 import { CreateClienteComponent2 } from './create2';
+import { ClienteComponent } from './cliente.component';
+import { CreateClienteComponent } from './create';
 
 @NgModule({
   imports: [

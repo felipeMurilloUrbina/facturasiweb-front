@@ -1,7 +1,8 @@
 import { NgModule, ModuleWithProviders } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
-import { UsuarioComponent, CreateUsuarioComponent } from ".";
 import { AuthGuard } from "../../base";
+import { UsuarioComponent } from "./usuario.component";
+import { CreateUsuarioComponent } from "./create";
 const routes: Routes = [
   { path: '', component: UsuarioComponent },
   { path: 'nuevo', component: CreateUsuarioComponent, canActivate: [AuthGuard] },

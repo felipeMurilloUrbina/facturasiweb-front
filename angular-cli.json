@@ -26,6 +26,7 @@
         "../node_modules/primeng/resources/primeng.min.css",
         "assets/css/main.css", 	
         "assets/css/util.css",
+        "assets/vendor/waitme/waitMe.min.css",
         "../node_modules/angular2-toaster/toaster.min.css"
       ],
       "scripts": [
@@ -34,7 +35,7 @@
         "assets/js/adminlte.js",
         "assets/js/demo.js",
         "assets/js/pages/dashboard3.js",
-        "assets/js/waitMe.min.js",
+        "assets/vendor/waitme/waitMe.min.js",
         "assets/input-mask/jquery.inputmask.js",
         "assets/input-mask/jquery.inputmask.extensions.js",
         "assets/js/jquery.dataTables.js",

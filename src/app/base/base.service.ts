@@ -153,13 +153,13 @@ export class BaseService {
     $('body').waitMe({
       effect: 'bounce',
       text: 'Cargando...',
-      bg: 'rgba(255,255,255,0.3)',
-      color: '#459e00',
+      bg: 'rgba(255,255,255,0.6)',
+      color: '#007bff',
       maxSize: '',
       waitTime: -1,
       source: '',
       textPos: 'vertical',
-      fontSize: '',
+      fontSize: '18',
       onClose: function() {}
     });
   }

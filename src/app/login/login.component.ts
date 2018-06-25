@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Message } from 'primeng/primeng';
 import { LoginService } from './login.service';
 import { Usuario } from '../modelos/usuario.model';
+ declare var $: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,10 +26,21 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('token');
 }
 
-  ngOnInit() {
-    this._service.cerrarEsperando();
-    this.usuario = new Usuario();
-    this.sucursales.length
+ngOnInit() {
+  this.usuario = new Usuario();
+  this._service.activarEsperando();
+  // $('.limiter').waitMe({
+  //   effect: 'bounce',
+  //   text: 'Cargando...',
+  //   bg: 'rgba(255,255,255,0.3)',
+  //   color: '#459e00',
+  //   maxSize: '',
+  //   waitTime: -1,
+  //   source: '',
+  //   textPos: 'vertical',
+  //   fontSize: '',
+  //   onClose: function() {}
+  // });
   }
 
   showMessage(option, title, message) {
@@ -57,6 +69,7 @@ export class LoginComponent implements OnInit {
    }
 
   login() {
+    this._service.activarEsperando();
     if (this.sucursales.length > 0) {
       localStorage.setItem('sucursal', this.usuario.SucursalId.toString());
       this.router.navigate(['/admin']);
@@ -68,7 +81,6 @@ export class LoginComponent implements OnInit {
     }
     this._service.activarEsperando();
     this._service.postGenerico(this.usuario, '/usuarios/login').subscribe(data => {
-      this.isBlocked  = true;
       this.sucursales = data.Sucursales;
       localStorage.setItem('sucursales',  JSON.stringify(this.sucursales));
       localStorage.setItem('token',  data.Token);

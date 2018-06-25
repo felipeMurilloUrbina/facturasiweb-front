@@ -1,7 +1,8 @@
 import { NgModule, ModuleWithProviders } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
-import { TipoMovimientoComponent, CreateTipoMovimientoComponent } from '.';
 import { AuthGuard } from "../../base";
+import { CreateTipoMovimientoComponent } from "./create/create.component";
+import { TipoMovimientoComponent } from "./tipo-movimiento.component";
 const routes: Routes = [
   { path: '', component: TipoMovimientoComponent },
   { path: 'nuevo', component: CreateTipoMovimientoComponent, canActivate: [AuthGuard] },

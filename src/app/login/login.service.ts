@@ -36,24 +36,8 @@ export class LoginService extends BaseService {
   return Observable.throw(error.json().error || 'Server error');
   }
 
-  activarEsperando() {
-    // $('#' + contenedor).waitMe({
-    $('.login-box-body').waitMe({
-      effect: 'bounce',
-      text: 'Cargando...',
-      bg: 'rgba(255,255,255,0.3)',
-      color: '#459e00',
-      maxSize: '',
-      waitTime: -1,
-      source: '',
-      textPos: 'vertical',
-      fontSize: '',
-      onClose: function() {}
-      });
-  }
-
-  cerrarEsperando() {
-    $('.login-box-body').waitMe('hide');
-    // $('#' + contenedor).waitMe('hide');
-  }
+  // cerrarEsperando() {
+  //   $('.login-box-body').waitMe('hide');
+  //   // $('#' + contenedor).waitMe('hide');
+  // }
 }

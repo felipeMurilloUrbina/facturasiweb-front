@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { routingFactura } from './factura-routing.module';
-import {  FacturaComponent, CreateFacturaComponent, TablaFacturaComponent } from '.';
 import { AutoCompleteModule, ButtonModule, MultiSelectModule, SharedModule, DialogModule, DataTableModule } from 'primeng/primeng';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
@@ -10,6 +9,9 @@ import { CapturaIneComponent } from '../../../share/capturar-ine';
 import { ModificacionProductoComponent } from '../../../share/modificacion-producto';
 import { ShareModule } from '../../../share/share.module';
 import { ToNumberPipe } from '../../../base';
+import { TablaFacturaComponent } from './tabla-factura';
+import { FacturaComponent } from './factura.component';
+import { CreateFacturaComponent } from './create';
 
 
 @NgModule({
@@ -30,8 +32,8 @@ imports: [
   declarations: [
     TablaFacturaComponent,
     FacturaComponent,
-    ToNumberPipe,
     CreateFacturaComponent,
+    ToNumberPipe,
   ],
   exports: [TablaFacturaComponent],
   providers: [ToNumberPipe]
