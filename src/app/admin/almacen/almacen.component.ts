@@ -19,8 +19,6 @@ export class AlmacenComponent implements OnInit {
   height = '300px';
   constructor(private _router: Router, private _service: AlmacenService) { }
   ngOnInit() {
-    $('li').removeClass('active');
-    $('#almacenes').addClass('active');
      // Update the AdminLTE layouts
     this.get();
     this.cols = [
@@ -30,13 +28,10 @@ export class AlmacenComponent implements OnInit {
   }
 
   get() {
-    this._service.activarEsperando();
     this._service.get().subscribe(data => {
       this.almacenes = data;
-      this._service.activarEsperando();
     }, error => {},
     () => {
-      this._service.cerrarEsperando();
     });
   }
 

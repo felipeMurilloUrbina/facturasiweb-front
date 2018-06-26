@@ -20,8 +20,6 @@ export class LineaComponent implements OnInit {
   height = '300px';
   constructor(private _router: Router, private _service: LineaService) { }
   ngOnInit() {
-    $('li').removeClass('active');
-    $('#lineas').addClass('active');
      // Update the AdminLTE layouts
     this.get();
     this.cols = [
@@ -31,13 +29,10 @@ export class LineaComponent implements OnInit {
   }
 
   get() {
-    this._service.activarEsperando();
     this._service.get().subscribe(data => {
       this.lineas = data;
-      this._service.activarEsperando();
     }, error => {},
     () => {
-      this._service.cerrarEsperando();
     });
   }
 

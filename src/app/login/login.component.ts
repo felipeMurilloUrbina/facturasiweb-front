@@ -28,18 +28,11 @@ export class LoginComponent implements OnInit {
 
 ngOnInit() {
   this.usuario = new Usuario();
-  this._service.activarEsperando();
-  // $('.limiter').waitMe({
-  //   effect: 'bounce',
-  //   text: 'Cargando...',
-  //   bg: 'rgba(255,255,255,0.3)',
-  //   color: '#459e00',
-  //   maxSize: '',
-  //   waitTime: -1,
-  //   source: '',
-  //   textPos: 'vertical',
-  //   fontSize: '',
-  //   onClose: function() {}
+  // $(document).ready(() => {
+  //   console.log('a');
+  //   setTimeout(() => {
+  //     this._service.activarEsperando();
+  //   }, 100);
   // });
   }
 

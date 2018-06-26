@@ -49,25 +49,19 @@ export class TablaFacturaComponent implements OnInit {
   }
 
   getFacturasCliente() {
-    this._service.activarEsperando();
     this._service.getGenerico('facturas/' + this.clienteId).subscribe(data => {
       this.facturas = data;
       this.rellenarFiltro();
-      this._service.cerrarEsperando();
     }, error => {
-      this._service.cerrarEsperando();
       this._service.enviarMensaje('error', 'Error', 'Error al recuperar facturas, consulte a su administrador');
     });
   }
 
   get() {
-    this._service.activarEsperando();
     this._service.get().subscribe(data => {
       this.facturas = data;
       this.rellenarFiltro();
-      this._service.cerrarEsperando();
     }, error => {
-      this._service.cerrarEsperando();
       this._service.enviarMensaje('error', 'Error', 'Error al recuperar facturas, consulte a su administrador');
     });
   }

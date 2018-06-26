@@ -23,7 +23,12 @@ export class BaseService {
       method: RequestMethod.Get,
       headers: contentHeaders,
   });
-  constructor (public  _router: Router, public _http: Http, public _baseUri: string, public modulo: string, toasterService: ToasterService) {
+  constructor (
+    public  _router: Router,
+    public _http: Http,
+    public _baseUri: string,
+    public modulo: string,
+    toasterService: ToasterService) {
     this.baseUrl = _baseUri + 'api/';
     contentHeaders.delete('token');
     contentHeaders.append('token', localStorage.getItem('token'));
@@ -124,7 +129,7 @@ export class BaseService {
     this.activarEsperando();
     return this.intercept(this._http.request(request).map(res => {
       this.cerrarEsperando();
-      return  res.json()
+      return  res.json();
     }
     ));
   }
@@ -149,20 +154,6 @@ export class BaseService {
     this.toasterService.pop(opcion, titulo, mensaje);
   }
 
-  activarEsperando() {
-    $('body').waitMe({
-      effect: 'bounce',
-      text: 'Cargando...',
-      bg: 'rgba(255,255,255,0.6)',
-      color: '#007bff',
-      maxSize: '',
-      waitTime: -1,
-      source: '',
-      textPos: 'vertical',
-      fontSize: '18',
-      onClose: function() {}
-    });
-  }
   
   resolveFieldData(data: any, field: string): any {
     if (data && field) {
@@ -183,8 +174,26 @@ export class BaseService {
       return null;
     }
   }
-
+  
+  activarEsperando() {
+  $(document).ready(() => {
+    $('body').waitMe({
+      effect: 'bounce',
+      text: 'Cargando...',
+      bg: 'rgba(255,255,255,0.6)',
+      color: '#007bff',
+      maxSize: '',
+      waitTime: -1,
+      source: '',
+      textPos: 'vertical',
+      fontSize: '18',
+      onClose: function() {}
+    });
+  });
+  }
   cerrarEsperando() {
-    $('body').waitMe('hide');
+    $(document).ready(() => {
+      $('body').waitMe('hide');
+    });
   }
 }

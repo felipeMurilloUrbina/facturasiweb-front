@@ -20,8 +20,6 @@ export class ClienteComponent implements OnInit {
   height = '300px';
   constructor(private _router: Router, private _service: ClienteService) { }
   ngOnInit() {
-    $('li').removeClass('active');
-    $('#clientes').addClass('active');
     this.get();
     this.cols = [
       { field: 'Id', header: 'Codigo' },
@@ -33,13 +31,11 @@ export class ClienteComponent implements OnInit {
   }
 
   get() {
-    this._service.activarEsperando();
+    // this._service.activarEsperando();
     this._service.get().subscribe(data => {
       this.clientes = data;
-      this._service.activarEsperando();
     }, error => {},
     () => {
-      this._service.cerrarEsperando();
     });
   }
 
