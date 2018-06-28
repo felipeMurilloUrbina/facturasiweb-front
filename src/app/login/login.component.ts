@@ -62,7 +62,6 @@ ngOnInit() {
    }
 
   login() {
-    this._service.activarEsperando();
     if (this.sucursales.length > 0) {
       localStorage.setItem('sucursal', this.usuario.SucursalId.toString());
       this.router.navigate(['/admin']);
@@ -80,6 +79,7 @@ ngOnInit() {
       this.tituloBoton = 'Seleccione Empresa';
       this._service.cerrarEsperando();
     }, error => {
+      console.log(error);
       if (!error._body.isTrusted) {
         let er = eval('(' + error._body + ')');
         if (er) {

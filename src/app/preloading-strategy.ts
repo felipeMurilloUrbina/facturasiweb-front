@@ -57,6 +57,8 @@ export class CustomPreloadingStrategy implements PreloadingStrategy {
           });
         }
       });
+    }, error => {
+      console.log(error);
     });
   }
 }

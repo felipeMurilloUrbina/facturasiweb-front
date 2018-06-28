@@ -9,10 +9,14 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { contentHeaders } from './headers';
 import { environment } from '../../environments/environment';
-import {Message} from 'primeng/components/common/api';
 import {MessageService} from 'primeng/components/common/messageservice';
 declare var $: any;
-
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor, HttpErrorResponse, HttpResponse
+} from '@angular/common/http';
 @Injectable()
 export class BaseService {
   private toasterService: ToasterService;
@@ -135,18 +139,25 @@ export class BaseService {
   }
 
   intercept(observable: Observable<any>) {
-    return observable.catch(err => {
-      this.cerrarEsperando();
-      if (err.status === 0 ) {
-        // this.enviarMensaje('error',  'Error', 'Error, con el servicio de datos');
-        // this._router.navigate(['/login']);
-      } else if (err.status === 401) {
-        return this.sinPermisos();
-      } else if (err.status === 403) {
-        return this.forbidden();
-      } else {
-        return Observable.throw(err);
+    
+    console.log(observable);
+    return observable.catch(error => {
+      if (error instanceof HttpErrorResponse) {
+        if (error.status === 401) {
+          return Observable.of(error);
+        }
       }
+      this.cerrarEsperando();
+      // if (error.status === 0 ) {
+      //   // this.enviarMensaje('error',  'Error', 'Error, con el servicio de datos');
+      //   // this._router.navigate(['/login']);
+      // } else if (err.status === 401) {
+      //   return this.sinPermisos();
+      // } else if (err.status === 403) {
+      //   return this.forbidden();
+      // } else {
+      //   return Observable.throw(err);
+      // }
     });
   }
 
